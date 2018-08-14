@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		FAF643A921211AFC00327A19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF643A821211AFC00327A19 /* AppDelegate.swift */; };
-		FAF643AB21211AFC00327A19 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF643AA21211AFC00327A19 /* ViewController.swift */; };
+		FAF643AB21211AFC00327A19 /* YourPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF643AA21211AFC00327A19 /* YourPlanViewController.swift */; };
 		FAF643AE21211AFC00327A19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF643AC21211AFC00327A19 /* Main.storyboard */; };
 		FAF643B021211AFD00327A19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF643AF21211AFD00327A19 /* Assets.xcassets */; };
 		FAF643B321211AFD00327A19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF643B121211AFD00327A19 /* LaunchScreen.storyboard */; };
 		FAF643BE21211AFD00327A19 /* EasyMealsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF643BD21211AFD00327A19 /* EasyMealsTests.swift */; };
+		FAF643C9212267B100327A19 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF643C8212267B100327A19 /* CalendarCell.swift */; };
+		FAF643CB21227C7D00327A19 /* MealItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF643CA21227C7D00327A19 /* MealItemCell.swift */; };
+		FAF643CD212285B900327A19 /* MealHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF643CC212285B900327A19 /* MealHeaderCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +31,7 @@
 /* Begin PBXFileReference section */
 		FAF643A521211AFC00327A19 /* EasyMeals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyMeals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF643A821211AFC00327A19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FAF643AA21211AFC00327A19 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FAF643AA21211AFC00327A19 /* YourPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPlanViewController.swift; sourceTree = "<group>"; };
 		FAF643AD21211AFC00327A19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FAF643AF21211AFD00327A19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAF643B221211AFD00327A19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +39,9 @@
 		FAF643B921211AFD00327A19 /* EasyMealsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyMealsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF643BD21211AFD00327A19 /* EasyMealsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyMealsTests.swift; sourceTree = "<group>"; };
 		FAF643BF21211AFD00327A19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAF643C8212267B100327A19 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		FAF643CA21227C7D00327A19 /* MealItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealItemCell.swift; sourceTree = "<group>"; };
+		FAF643CC212285B900327A19 /* MealHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealHeaderCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,8 +84,11 @@
 			isa = PBXGroup;
 			children = (
 				FAF643A821211AFC00327A19 /* AppDelegate.swift */,
-				FAF643AA21211AFC00327A19 /* ViewController.swift */,
+				FAF643AA21211AFC00327A19 /* YourPlanViewController.swift */,
+				FAF643C8212267B100327A19 /* CalendarCell.swift */,
 				FAF643AC21211AFC00327A19 /* Main.storyboard */,
+				FAF643CC212285B900327A19 /* MealHeaderCell.swift */,
+				FAF643CA21227C7D00327A19 /* MealItemCell.swift */,
 				FAF643AF21211AFD00327A19 /* Assets.xcassets */,
 				FAF643B121211AFD00327A19 /* LaunchScreen.storyboard */,
 				FAF643B421211AFD00327A19 /* Info.plist */,
@@ -197,8 +206,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAF643AB21211AFC00327A19 /* ViewController.swift in Sources */,
+				FAF643AB21211AFC00327A19 /* YourPlanViewController.swift in Sources */,
+				FAF643CD212285B900327A19 /* MealHeaderCell.swift in Sources */,
+				FAF643C9212267B100327A19 /* CalendarCell.swift in Sources */,
 				FAF643A921211AFC00327A19 /* AppDelegate.swift in Sources */,
+				FAF643CB21227C7D00327A19 /* MealItemCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

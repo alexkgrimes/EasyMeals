@@ -1,24 +1,183 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TZ5-HO-OZf">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="4AE-pm-dOA">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0as-62-2NZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="TZ5-HO-OZf" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="2Nw-t2-e3k">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="jv6-7u-yej"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-865" y="32"/>
+        </scene>
+        <!--Your Plan-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="YourPlanViewController" customModule="EasyMeals" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1lH-Pm-7ny">
+                                <rect key="frame" x="8" y="124" width="359" height="80"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="obd-aa-rNn"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Byq-aV-8nj">
+                                    <size key="itemSize" width="75" height="75"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="calendarCell" id="j2Z-FD-gBw" customClass="CalendarCell" customModule="EasyMeals" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAO-ui-dRf">
+                                                    <rect key="frame" x="17" y="20" width="40" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aug 10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J9Y-aN-SJl">
+                                                    <rect key="frame" x="15" y="44" width="45" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="13e-bt-Kb5"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottomMargin" secondItem="J9Y-aN-SJl" secondAttribute="bottom" constant="6" id="Man-Ve-uMN"/>
+                                            <constraint firstItem="J9Y-aN-SJl" firstAttribute="centerX" secondItem="FAO-ui-dRf" secondAttribute="centerX" id="d2H-W0-mO6"/>
+                                            <constraint firstItem="J9Y-aN-SJl" firstAttribute="top" secondItem="FAO-ui-dRf" secondAttribute="bottom" constant="3" id="dD9-3D-dY7"/>
+                                            <constraint firstItem="FAO-ui-dRf" firstAttribute="top" secondItem="j2Z-FD-gBw" secondAttribute="topMargin" constant="12" id="rQQ-sn-Cis"/>
+                                            <constraint firstItem="FAO-ui-dRf" firstAttribute="centerX" secondItem="j2Z-FD-gBw" secondAttribute="centerX" id="t2J-ch-qlv"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="J9Y-aN-SJl" id="T3C-kG-I3O"/>
+                                            <outlet property="dayLabel" destination="FAO-ui-dRf" id="s0T-jm-SEl"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="F6l-N6-i0K"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="rbh-Xb-UXH"/>
+                                </connections>
+                            </collectionView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fna-GQ-EuL">
+                                <rect key="frame" x="8" y="212" width="359" height="455"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mealItemCell" rowHeight="62" id="obQ-X7-sOI" customClass="MealItemCell" customModule="EasyMeals" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="359" height="62"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="obQ-X7-sOI" id="hHV-Pa-ymi">
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="61.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0n9-0p-6UE">
+                                                    <rect key="frame" x="14" y="20.5" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="0n9-0p-6UE" firstAttribute="leading" secondItem="hHV-Pa-ymi" secondAttribute="leadingMargin" constant="-1" id="jDt-dc-IiB"/>
+                                                <constraint firstItem="0n9-0p-6UE" firstAttribute="centerY" secondItem="hHV-Pa-ymi" secondAttribute="centerY" id="rcV-Iq-mIB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="foodLabel" destination="0n9-0p-6UE" id="ca4-1G-Q85"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mealHeaderCell" rowHeight="62" id="Zlz-Gx-L64" customClass="MealHeaderCell" customModule="EasyMeals" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="90" width="359" height="62"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zlz-Gx-L64" id="Qhs-As-Rkl">
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="61.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7m-Xg-764">
+                                                    <rect key="frame" x="15" y="19" width="55" height="28"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pa0-Fv-GEF">
+                                                    <rect key="frame" x="315" y="5" width="30" height="53"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                                    <state key="normal" title="+"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="a7m-Xg-764" firstAttribute="top" secondItem="Qhs-As-Rkl" secondAttribute="topMargin" constant="8" id="Jk0-5Q-GCn"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Pa0-Fv-GEF" secondAttribute="trailing" constant="-1" id="Uhh-h1-R4g"/>
+                                                <constraint firstItem="a7m-Xg-764" firstAttribute="leading" secondItem="Qhs-As-Rkl" secondAttribute="leadingMargin" constant="-1" id="XpY-W4-8oU"/>
+                                                <constraint firstItem="a7m-Xg-764" firstAttribute="baseline" secondItem="Pa0-Fv-GEF" secondAttribute="baseline" id="cw6-76-30P"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="a7m-Xg-764" secondAttribute="bottom" constant="2" id="iwU-mD-v8s"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="addItemButton" destination="Pa0-Fv-GEF" id="sxl-ov-Mbw"/>
+                                            <outlet property="mealNameLabel" destination="a7m-Xg-764" id="fh0-Yt-puy"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="aFn-1Y-0fd"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="fpb-ZF-ugC"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="fna-GQ-EuL" firstAttribute="trailing" secondItem="1lH-Pm-7ny" secondAttribute="trailing" id="4Si-fh-lQ6"/>
+                            <constraint firstItem="1lH-Pm-7ny" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="AiD-30-ASR"/>
+                            <constraint firstItem="fna-GQ-EuL" firstAttribute="leading" secondItem="1lH-Pm-7ny" secondAttribute="leading" id="FGx-ez-Zqx"/>
+                            <constraint firstItem="fna-GQ-EuL" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="dTw-2w-qIr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1lH-Pm-7ny" secondAttribute="trailing" constant="8" id="kS1-Rw-bEu"/>
+                            <constraint firstItem="fna-GQ-EuL" firstAttribute="top" secondItem="1lH-Pm-7ny" secondAttribute="bottom" constant="8" id="mHF-Dd-Ouy"/>
+                            <constraint firstItem="1lH-Pm-7ny" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="qKN-5O-i4m"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Your Plan" largeTitleDisplayMode="always" id="Otc-Vw-c6a"/>
+                    <connections>
+                        <outlet property="calendarCollectionView" destination="1lH-Pm-7ny" id="k6m-Rp-JL4"/>
+                        <outlet property="calendarFlowLayout" destination="Byq-aV-8nj" id="Wy5-NY-r0c"/>
+                        <outlet property="mealPlanTableView" destination="fna-GQ-EuL" id="6rJ-jO-ngV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-12" y="31.934032983508249"/>
         </scene>
     </scenes>
 </document>
