@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA06DBCA2127B10A005BB399 /* AddFoodPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06DBC92127B10A005BB399 /* AddFoodPresentationController.swift */; };
+		FA06DBCC2127B485005BB399 /* SlideInPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06DBCB2127B485005BB399 /* SlideInPresentationManager.swift */; };
+		FA0849A021266657002F4E3B /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08499F21266657002F4E3B /* AddItemViewController.swift */; };
 		FAF643A921211AFC00327A19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF643A821211AFC00327A19 /* AppDelegate.swift */; };
 		FAF643AB21211AFC00327A19 /* YourPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF643AA21211AFC00327A19 /* YourPlanViewController.swift */; };
 		FAF643AE21211AFC00327A19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF643AC21211AFC00327A19 /* Main.storyboard */; };
@@ -29,6 +32,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA06DBC92127B10A005BB399 /* AddFoodPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodPresentationController.swift; sourceTree = "<group>"; };
+		FA06DBCB2127B485005BB399 /* SlideInPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationManager.swift; sourceTree = "<group>"; };
+		FA08499F21266657002F4E3B /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		FAF643A521211AFC00327A19 /* EasyMeals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyMeals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF643A821211AFC00327A19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAF643AA21211AFC00327A19 /* YourPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPlanViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +98,9 @@
 				FAF643AF21211AFD00327A19 /* Assets.xcassets */,
 				FAF643B121211AFD00327A19 /* LaunchScreen.storyboard */,
 				FAF643B421211AFD00327A19 /* Info.plist */,
+				FA08499F21266657002F4E3B /* AddItemViewController.swift */,
+				FA06DBC92127B10A005BB399 /* AddFoodPresentationController.swift */,
+				FA06DBCB2127B485005BB399 /* SlideInPresentationManager.swift */,
 			);
 			path = EasyMeals;
 			sourceTree = "<group>";
@@ -210,7 +219,10 @@
 				FAF643CD212285B900327A19 /* MealHeaderCell.swift in Sources */,
 				FAF643C9212267B100327A19 /* CalendarCell.swift in Sources */,
 				FAF643A921211AFC00327A19 /* AppDelegate.swift in Sources */,
+				FA06DBCC2127B485005BB399 /* SlideInPresentationManager.swift in Sources */,
 				FAF643CB21227C7D00327A19 /* MealItemCell.swift in Sources */,
+				FA0849A021266657002F4E3B /* AddItemViewController.swift in Sources */,
+				FA06DBCA2127B10A005BB399 /* AddFoodPresentationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
