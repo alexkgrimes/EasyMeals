@@ -12,9 +12,7 @@ class AddFoodPresentationController: UIPresentationController {
     fileprivate var dimmingView: UIView!
     
     init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?, showing: Bool = true) {
-        
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
-        
         setupDimmingView()
     }
     
@@ -50,24 +48,17 @@ class AddFoodPresentationController: UIPresentationController {
         presentedView?.frame = frameOfPresentedViewInContainerView
     }
 
-    override func size(forChildContentContainer container: UIContentContainer,
-                       withParentContainerSize parentSize: CGSize) -> CGSize {
+    override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
         return CGSize(width: parentSize.width, height: parentSize.height*(2.0/3.0))
     }
     
     override var frameOfPresentedViewInContainerView: CGRect {
     
         var frame: CGRect = .zero
-        frame.size = size(forChildContentContainer: presentedViewController,
-                          withParentContainerSize: containerView!.bounds.size)
-    
+        frame.size = size(forChildContentContainer: presentedViewController, withParentContainerSize: containerView!.bounds.size)
         frame.origin.y = containerView!.frame.height*(1.0/3.0)
         return frame
     }
-
-
-
-
 }
 
 // MARK: - Private
@@ -86,6 +77,5 @@ private extension AddFoodPresentationController {
     @objc dynamic func handleTap(recognizer: UITapGestureRecognizer) {
         presentingViewController.dismiss(animated: true)
     }
-
 }
 

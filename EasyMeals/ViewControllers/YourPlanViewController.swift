@@ -16,16 +16,14 @@ class YourPlanViewController: UIViewController {
 
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     @IBOutlet weak var calendarFlowLayout: UICollectionViewFlowLayout!
-    
     @IBOutlet weak var mealPlanTableView: UITableView!
     
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
     
+    // TODO: make real data
     let calendarDays = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]
     let calendarDates = ["Aug 10", "Aug 11", "Aug 12", "Aug 13", "Aug 14", "Aug 15", "Aug 16"]
-    
     let planHeaders = ["Breakfast", "Lunch", "Dinner", "Snacks", "Fluids"]
-    
     let breakfastFoods = ["Eggs (2)", "Oatmeal"]
     let lunchFoods = ["Turkey Sandwich", "Apple", "Chips"]
     let dinnerFoods = ["Trader Joe's Pasta", "Asparagus"]
@@ -48,16 +46,17 @@ class YourPlanViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? AddItemViewController {
-            // set data for modal placeholder
-            
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
         }
     }
 }
+
+// MARK: - TableViewDelegate
 
 extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -69,30 +68,28 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mealItemCell", for: indexPath) as! MealItemCell
-        cell.backgroundColor = .gray
         let itemsInSection = meals[planHeaders[indexPath.section]]
         
         cell.foodLabel.text = itemsInSection?[indexPath.row]
-        cell.backgroundColor = .white
         cell.foodLabel.textColor = .black
+        
+        cell.backgroundColor = .white
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         cell.layer.borderColor = UIColor.white.cgColor as CGColor
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
+        let header = tableView.dequeueReusableCell(withIdentifier: "mealHeaderCell") as! MealHeaderCell
         let violet = hexStringToUIColor(hex: "6c71c4")
 
-        let header = tableView.dequeueReusableCell(withIdentifier: "mealHeaderCell") as! MealHeaderCell
-        
         header.mealNameLabel.text = planHeaders[section]
         header.mealNameLabel.textColor = .white
         header.addItemButton.setTitleColor(.white, for: .normal)
+        
         header.contentView.backgroundColor = violet
         header.layer.cornerRadius = 16.0
         header.layer.borderWidth = 0
-        
         return header
     }
     
@@ -105,30 +102,30 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+// MARK: - CollectionView Delegate
+
 extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return calendarDates.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cyan = hexStringToUIColor(hex: "2aa198")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "calendarCell", for: indexPath) as! CalendarCell
-        cell.backgroundColor = cyan
+        let cyan = hexStringToUIColor(hex: "2aa198")
+        
         cell.dayLabel.text = calendarDays[indexPath.row]
         cell.dateLabel.text = calendarDates[indexPath.row]
         cell.dayLabel.textColor = .white
         cell.dateLabel.textColor = .white
-        cell.layer.cornerRadius = 16.0
         
+        cell.backgroundColor = cyan
+        cell.layer.cornerRadius = 16.0
         return cell
     }
 }
 
+// MARK: - Colors
 
-
-//
-// Colors
-//
 extension YourPlanViewController {
     
     func hexStringToUIColor (hex:String) -> UIColor {

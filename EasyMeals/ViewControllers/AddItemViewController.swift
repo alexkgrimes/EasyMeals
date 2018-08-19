@@ -25,15 +25,15 @@ class AddItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - Keyboard Show/Hide
     
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(AddItemViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -46,32 +46,16 @@ class AddItemViewController: UIViewController {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if !keyboardIsShowing {
-                self.view.frame.origin.y -= Constants.keyboardHeight
-                keyboardIsShowing = true
-            }
+        if !keyboardIsShowing {
+            self.view.frame.origin.y -= Constants.keyboardHeight
+            keyboardIsShowing = true
         }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if keyboardIsShowing {
-                self.view.frame.origin.y += Constants.keyboardHeight
-                keyboardIsShowing = false
-            }
+        if keyboardIsShowing {
+            self.view.frame.origin.y += Constants.keyboardHeight
+            keyboardIsShowing = false
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
