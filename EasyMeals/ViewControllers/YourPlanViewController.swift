@@ -19,22 +19,25 @@ class YourPlanViewController: UIViewController {
     @IBOutlet weak var mealPlanTableView: UITableView!
     
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
+
     
     // TODO: make real data
     let calendarDays = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]
     let calendarDates = ["Aug 10", "Aug 11", "Aug 12", "Aug 13", "Aug 14", "Aug 15", "Aug 16"]
     let planHeaders = ["Breakfast", "Lunch", "Dinner", "Snacks", "Fluids"]
-    let breakfastFoods = ["Eggs (2)", "Oatmeal"]
-    let lunchFoods = ["Turkey Sandwich", "Apple", "Chips"]
-    let dinnerFoods = ["Trader Joe's Pasta", "Asparagus"]
-    let snackFoods = ["Trail mix"]
+    
+    let breakfastFoods: [String] = []
+    let lunchFoods: [String] = []
+    let dinnerFoods: [String] = []
+    let snackFoods: [String] = []
     let fluids = ["1 GGB"]
     
-    let meals: [String : [String]] = ["Breakfast" : ["Eggs (2)", "Oatmeal"], "Lunch" : ["Turkey Sandwich", "Apple", "Chips"], "Dinner" : ["Trader Joe's Pasta", "Asparagus"], "Snacks" : ["Trail mix"], "Fluids" : ["1 GGB"]]
+    var meals: [String : [String]] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        meals = ["Breakfast" : breakfastFoods, "Lunch" : lunchFoods, "Dinner" : dinnerFoods, "Snacks" : snackFoods, "Fluids" : ["1 GGB"]]
         
         calendarFlowLayout.scrollDirection = .horizontal
         calendarFlowLayout.minimumLineSpacing = 4
@@ -50,6 +53,7 @@ class YourPlanViewController: UIViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? AddItemViewController {
+            controller.delegate = self
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
         }
@@ -123,6 +127,14 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
         return cell
     }
 }
+
+extension YourPlanViewController: PizzaDelegate {
+    func onPizzaReady(type: String)
+    {
+        print("Pizza ready. The best pizza of all pizzas is... \(type)")
+    }
+}
+
 
 // MARK: - Colors
 

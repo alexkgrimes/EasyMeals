@@ -8,10 +8,16 @@
 
 import UIKit
 
-class AddItemViewController: UIViewController {
+protocol PizzaDelegate: class {
+    func onPizzaReady(type: String)
+}
 
+class AddItemViewController: UIViewController {
+    
     @IBOutlet weak var addItemTitle: UILabel!
     @IBOutlet weak var doneAddingButton: UIButton!
+    
+    var delegate: PizzaDelegate?
     
     private var keyboardIsShowing = false
     
@@ -20,6 +26,7 @@ class AddItemViewController: UIViewController {
     }
     
     @IBAction func doneAddingButtonPressed(_ sender: UIButton) {
+        delegate?.onPizzaReady(type: "Pizza di Mama")
         self.dismiss(animated: true, completion: nil)
     }
     
