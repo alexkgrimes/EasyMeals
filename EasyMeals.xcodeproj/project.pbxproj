@@ -68,6 +68,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA06DBCD2129B7B9005BB399 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FAF643AA21211AFC00327A19 /* YourPlanViewController.swift */,
+				FA08499F21266657002F4E3B /* AddItemViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FA06DBCE2129B842005BB399 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				FAF643CC212285B900327A19 /* MealHeaderCell.swift */,
+				FAF643C8212267B100327A19 /* CalendarCell.swift */,
+				FAF643CA21227C7D00327A19 /* MealItemCell.swift */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
+		FA06DBCF2129B878005BB399 /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				FAF643AC21211AFC00327A19 /* Main.storyboard */,
+				FAF643B121211AFD00327A19 /* LaunchScreen.storyboard */,
+			);
+			path = StoryBoards;
+			sourceTree = "<group>";
+		};
+		FA06DBD02129B8C1005BB399 /* Presentors */ = {
+			isa = PBXGroup;
+			children = (
+				FA06DBC92127B10A005BB399 /* AddFoodPresentationController.swift */,
+				FA06DBCB2127B485005BB399 /* SlideInPresentationManager.swift */,
+			);
+			path = Presentors;
+			sourceTree = "<group>";
+		};
 		FAF6439C21211AFC00327A19 = {
 			isa = PBXGroup;
 			children = (
@@ -90,17 +127,12 @@
 			isa = PBXGroup;
 			children = (
 				FAF643A821211AFC00327A19 /* AppDelegate.swift */,
-				FAF643AA21211AFC00327A19 /* YourPlanViewController.swift */,
-				FAF643C8212267B100327A19 /* CalendarCell.swift */,
-				FAF643AC21211AFC00327A19 /* Main.storyboard */,
-				FAF643CC212285B900327A19 /* MealHeaderCell.swift */,
-				FAF643CA21227C7D00327A19 /* MealItemCell.swift */,
+				FA06DBCF2129B878005BB399 /* StoryBoards */,
+				FA06DBCD2129B7B9005BB399 /* ViewControllers */,
+				FA06DBCE2129B842005BB399 /* CustomCells */,
+				FA06DBD02129B8C1005BB399 /* Presentors */,
 				FAF643AF21211AFD00327A19 /* Assets.xcassets */,
-				FAF643B121211AFD00327A19 /* LaunchScreen.storyboard */,
 				FAF643B421211AFD00327A19 /* Info.plist */,
-				FA08499F21266657002F4E3B /* AddItemViewController.swift */,
-				FA06DBC92127B10A005BB399 /* AddFoodPresentationController.swift */,
-				FA06DBCB2127B485005BB399 /* SlideInPresentationManager.swift */,
 			);
 			path = EasyMeals;
 			sourceTree = "<group>";
