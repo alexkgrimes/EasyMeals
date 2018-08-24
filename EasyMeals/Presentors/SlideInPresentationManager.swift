@@ -14,11 +14,8 @@ class SlideInPresentationManager: NSObject {
 
 // MARK: - UIViewControllerTransitioningDelegate
 extension SlideInPresentationManager: UIViewControllerTransitioningDelegate {
-    func presentationController(forPresented presented: UIViewController,
-                                presenting: UIViewController?,
-                                source: UIViewController) -> UIPresentationController? {
-        let presentationController = AddFoodPresentationController(presentedViewController: presented,
-                                                                   presenting: presenting)
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        let presentationController = AddFoodPresentationController(presentedViewController: presented, presenting: presenting)
         return presentationController
     }
 

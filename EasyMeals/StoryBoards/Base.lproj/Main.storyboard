@@ -182,6 +182,7 @@
                         <outlet property="calendarCollectionView" destination="1lH-Pm-7ny" id="k6m-Rp-JL4"/>
                         <outlet property="calendarFlowLayout" destination="Byq-aV-8nj" id="Wy5-NY-r0c"/>
                         <outlet property="mealPlanTableView" destination="fna-GQ-EuL" id="6rJ-jO-ngV"/>
+                        <outlet property="tableView" destination="fna-GQ-EuL" id="jzM-Sa-Q1d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -256,6 +257,8 @@
                     <connections>
                         <outlet property="addItemTitle" destination="Z9l-0X-uNv" id="bTk-sU-U7U"/>
                         <outlet property="doneAddingButton" destination="QPE-yc-jsj" id="c3m-Gi-P3p"/>
+                        <outlet property="newFoodTextField" destination="G5x-MO-4FQ" id="WO9-DS-6Pa"/>
+                        <outlet property="quantityTextField" destination="SaW-Ne-1r5" id="aMV-vT-xn4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XLa-cf-KFc" userLabel="First Responder" sceneMemberID="firstResponder"/>

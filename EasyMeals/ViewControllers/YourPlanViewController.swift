@@ -8,36 +8,27 @@
 
 import UIKit
 
-class MyTapGesture: UITapGestureRecognizer {
-    var title: String = ""
-}
-
 class YourPlanViewController: UIViewController {
 
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     @IBOutlet weak var calendarFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var mealPlanTableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
-
+    var mealTapped = ""
     
     // TODO: make real data
     let calendarDays = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]
     let calendarDates = ["Aug 10", "Aug 11", "Aug 12", "Aug 13", "Aug 14", "Aug 15", "Aug 16"]
     let planHeaders = ["Breakfast", "Lunch", "Dinner", "Snacks", "Fluids"]
     
-    let breakfastFoods: [String] = []
-    let lunchFoods: [String] = []
-    let dinnerFoods: [String] = []
-    let snackFoods: [String] = []
-    let fluids = ["1 GGB"]
-    
     var meals: [String : [String]] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        meals = ["Breakfast" : breakfastFoods, "Lunch" : lunchFoods, "Dinner" : dinnerFoods, "Snacks" : snackFoods, "Fluids" : ["1 GGB"]]
+        meals = ["Breakfast" : [], "Lunch" : [], "Dinner" : [], "Snacks" : [], "Fluids" : []]
         
         calendarFlowLayout.scrollDirection = .horizontal
         calendarFlowLayout.minimumLineSpacing = 4
@@ -94,6 +85,8 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
         header.contentView.backgroundColor = violet
         header.layer.cornerRadius = 16.0
         header.layer.borderWidth = 0
+        
+        header.delegate = self
         return header
     }
     
@@ -124,14 +117,26 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
         
         cell.backgroundColor = cyan
         cell.layer.cornerRadius = 16.0
+        
         return cell
     }
 }
 
-extension YourPlanViewController: PizzaDelegate {
-    func onPizzaReady(type: String)
+// MARK: - AddFoodDelegate
+
+extension YourPlanViewController: AddFoodDelegate {
+    func doneButtonTapped(for newFood: String)
     {
-        print("Pizza ready. The best pizza of all pizzas is... \(type)")
+            meals[mealTapped]?.append(newFood)
+            tableView.reloadData()
+    }
+}
+
+// MARK: - CreateMealDelegate
+
+extension YourPlanViewController: CreateMealDelegate {
+    func mealButtonPressed(for mealType: String) {
+        mealTapped = mealType
     }
 }
 

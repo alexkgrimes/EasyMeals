@@ -8,25 +8,36 @@
 
 import UIKit
 
-protocol PizzaDelegate: class {
-    func onPizzaReady(type: String)
+protocol AddFoodDelegate: class {
+    func doneButtonTapped(for newFood: String)
 }
 
 class AddItemViewController: UIViewController {
     
     @IBOutlet weak var addItemTitle: UILabel!
     @IBOutlet weak var doneAddingButton: UIButton!
+    @IBOutlet weak var newFoodTextField: UITextField!
+    @IBOutlet weak var quantityTextField: UITextField!
     
-    var delegate: PizzaDelegate?
+    weak var delegate: AddFoodDelegate?
     
     private var keyboardIsShowing = false
+    private var newFoodText = ""
+    private var quantityText = ""
+    
+    var mealName = ""
     
     private enum Constants {
         static let keyboardHeight: CGFloat = 216.0
     }
     
     @IBAction func doneAddingButtonPressed(_ sender: UIButton) {
-        delegate?.onPizzaReady(type: "Pizza di Mama")
+        guard let newFoodText = newFoodTextField.text, let quantityText = quantityTextField.text else {
+            return
+        }
+        let foodListString = newFoodText + " (" + quantityText + ") "
+        
+        delegate?.doneButtonTapped(for: foodListString)
         self.dismiss(animated: true, completion: nil)
     }
     
