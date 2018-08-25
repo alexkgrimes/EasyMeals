@@ -15,20 +15,28 @@ class YourPlanViewController: UIViewController {
     @IBOutlet weak var mealPlanTableView: UITableView!
     @IBOutlet weak var tableView: UITableView!
     
+    private enum Constants {
+        static let cornerRadius: CGFloat = 16.0
+        static let numberOfCalendarCells = 12
+        static let tableViewHeaderHeight: CGFloat = 62.0
+    }
+    
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
     var mealTapped = ""
     
-    // TODO: make real data
-    let calendarDays = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]
-    let calendarDates = ["Aug 10", "Aug 11", "Aug 12", "Aug 13", "Aug 14", "Aug 15", "Aug 16"]
+    let calendarDays = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"]
+    let calendarMonths = ["Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov"]
     let planHeaders = ["Breakfast", "Lunch", "Dinner", "Snacks", "Fluids"]
     
     var meals: [String : [String]] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
-        meals = ["Breakfast" : [], "Lunch" : [], "Dinner" : [], "Snacks" : [], "Fluids" : []]
+        planHeaders.forEach { header in
+            meals[header] = []
+        }
         
         calendarFlowLayout.scrollDirection = .horizontal
         calendarFlowLayout.minimumLineSpacing = 4
@@ -92,7 +100,7 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
         header.addItemButton.setTitleColor(.white, for: .normal)
         
         header.contentView.backgroundColor = violet
-        header.layer.cornerRadius = 16.0
+        header.layer.cornerRadius = Constants.cornerRadius
         header.layer.borderWidth = 0
         
         header.delegate = self
@@ -100,7 +108,7 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 62.0
+        return Constants.tableViewHeaderHeight
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -112,23 +120,32 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return calendarDates.count
+        return Constants.numberOfCalendarCells
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "calendarCell", for: indexPath) as! CalendarCell
         let cyan = hexStringToUIColor(hex: "2aa198")
         
-        cell.dayLabel.text = calendarDays[indexPath.row]
-        cell.dateLabel.text = calendarDates[indexPath.row]
+        let calendar = Calendar.current
+        let dateForCell = calendar.date(byAdding: .day, value: indexPath.row, to: Date())!
+
+        let dayOfTheWeek = calendar.component(.weekday, from: dateForCell)
+        let date = calendar.component(.day, from: dateForCell)
+        let month = calendar.component(.month, from: dateForCell)
+        
+        cell.dayLabel.text = calendarDays[dayOfTheWeek % calendarDays.count]
+        cell.dateLabel.text = calendarMonths[month % calendarMonths.count] + " \(date)"
         cell.dayLabel.textColor = .white
         cell.dateLabel.textColor = .white
         
         cell.backgroundColor = cyan
-        cell.layer.cornerRadius = 16.0
+        cell.layer.cornerRadius = Constants.cornerRadius
         
         return cell
     }
+    
+    
 }
 
 // MARK: - AddFoodDelegate

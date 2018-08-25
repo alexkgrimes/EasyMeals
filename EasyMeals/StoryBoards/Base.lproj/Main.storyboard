@@ -233,7 +233,7 @@
                                     <constraint firstAttribute="width" secondItem="QPE-yc-jsj" secondAttribute="height" multiplier="15:11" id="nCC-fI-WWA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="Done">
+                                <state key="normal" title="Add">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
