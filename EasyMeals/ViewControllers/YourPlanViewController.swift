@@ -21,23 +21,64 @@ class YourPlanViewController: UIViewController {
         static let tableViewHeaderHeight: CGFloat = 62.0
     }
     
+    var numDaysInWeek: Int {
+        return calendarDays.count
+    }
+    
+    var numMonthsInYear: Int {
+        return calendarMonths.count
+    }
+    
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
-    var mealTapped = ""
+    var mealTapped: String? = nil
+    var dateSelected: String? = nil
     
     let calendarDays = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"]
     let calendarMonths = ["Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov"]
     let planHeaders = ["Breakfast", "Lunch", "Dinner", "Snacks", "Fluids"]
     
-    var meals: [String : [String]] = [:]
+    var daysInCalendarCells: [String] = []
+    var datesInCalendarCells: [String] = []
+    
+    // var meals: [String : [String]] = [:]
+    struct FullPlan {
+        var plan: [String : DayPlan] = [:]
+    }
+    
+    struct DayPlan {
+        var day: [String : [String]] = [:]
+    }
+    
+    var fullPlan = FullPlan()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view, typically from a nib.
-        planHeaders.forEach { header in
-            meals[header] = []
+        // Set up calendar
+        let calendar = Calendar.current
+        for indexPathForCell in 0...Constants.numberOfCalendarCells {
+            let dateForCell = calendar.date(byAdding: .day, value: indexPathForCell, to: Date())!
+            let dayOfTheWeek = calendar.component(.weekday, from: dateForCell)
+            let date = calendar.component(.day, from: dateForCell)
+            let month = calendar.component(.month, from: dateForCell)
+            
+            daysInCalendarCells.append(calendarDays[dayOfTheWeek % numDaysInWeek])
+            datesInCalendarCells.append(calendarMonths[month % numMonthsInYear] + " \(date)")
         }
         
+        // Set up data for tableview
+//        planHeaders.forEach { header in
+//            meals[header] = []
+//        }
+        
+        dateSelected = datesInCalendarCells[0]
+        for date in datesInCalendarCells {
+            fullPlan.plan[date] = DayPlan()
+            for header in planHeaders {
+                fullPlan.plan[date]?.day[header] = []
+            }
+        }
+            
         calendarFlowLayout.scrollDirection = .horizontal
         calendarFlowLayout.minimumLineSpacing = 4
         calendarFlowLayout.minimumInteritemSpacing = 4
@@ -63,7 +104,7 @@ class YourPlanViewController: UIViewController {
 
 extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let numRows = meals[planHeaders[section]]?.count else {
+        guard let date = dateSelected, let plan = fullPlan.plan[date], let numRows = plan.day[planHeaders[section]]?.count else {
             return 0
         }
         return numRows
@@ -71,9 +112,11 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mealItemCell", for: indexPath) as! MealItemCell
-        let itemsInSection = meals[planHeaders[indexPath.section]]
+        guard let date = dateSelected, let dayPlan = fullPlan.plan[date], let foods = dayPlan.day[planHeaders[indexPath.section]] else {
+            return cell
+        }
         
-        cell.foodLabel.text = itemsInSection?[indexPath.row]
+        cell.foodLabel.text = foods[indexPath.row]
         cell.foodLabel.textColor = .black
         
         cell.backgroundColor = .white
@@ -83,9 +126,12 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        guard let date = dateSelected, let dayPlan = fullPlan.plan[date], var meal = dayPlan.day[planHeaders[indexPath.section]] else {
+            return
+        }
+        
         if editingStyle == UITableViewCellEditingStyle.delete {
-            let meal = planHeaders[indexPath.section]
-            meals[meal]?.remove(at: indexPath.row)
+            meal.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             tableView.reloadData()
         }
@@ -127,15 +173,8 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "calendarCell", for: indexPath) as! CalendarCell
         let cyan = hexStringToUIColor(hex: "2aa198")
         
-        let calendar = Calendar.current
-        let dateForCell = calendar.date(byAdding: .day, value: indexPath.row, to: Date())!
-
-        let dayOfTheWeek = calendar.component(.weekday, from: dateForCell)
-        let date = calendar.component(.day, from: dateForCell)
-        let month = calendar.component(.month, from: dateForCell)
-        
-        cell.dayLabel.text = calendarDays[dayOfTheWeek % calendarDays.count]
-        cell.dateLabel.text = calendarMonths[month % calendarMonths.count] + " \(date)"
+        cell.dayLabel.text = daysInCalendarCells[indexPath.row]
+        cell.dateLabel.text = datesInCalendarCells[indexPath.row]
         cell.dayLabel.textColor = .white
         cell.dateLabel.textColor = .white
         
@@ -145,7 +184,20 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        dateSelected = datesInCalendarCells[indexPath.row]
+        tableView.reloadData()
+        
+        //Briefly fade the cell on selection
+        UIView.animate(withDuration: 0.3, animations: {
+            cell?.alpha = 0.5
+        }) { (completed) in
+            UIView.animate(withDuration: 0.3, animations: {
+                cell?.alpha = 1
+            })
+        }
+    }
 }
 
 // MARK: - AddFoodDelegate
@@ -153,8 +205,11 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
 extension YourPlanViewController: AddFoodDelegate {
     func doneButtonTapped(for newFood: String)
     {
-            meals[mealTapped]?.append(newFood)
-            tableView.reloadData()
+        guard let mealTapped = mealTapped, let date = dateSelected else {
+            return
+        }
+        fullPlan.plan[date]?.day[mealTapped]?.append(newFood)
+        tableView.reloadData()
     }
 }
 
