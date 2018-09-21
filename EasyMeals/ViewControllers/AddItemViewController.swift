@@ -35,7 +35,15 @@ class AddItemViewController: UIViewController {
         guard let newFoodText = newFoodTextField.text, let quantityText = quantityTextField.text else {
             return
         }
-        let foodListString = newFoodText + " (" + quantityText + ") "
+        
+        var foodListString = ""
+        if newFoodText == "" {
+            foodListString = ""
+        } else if quantityText == "" {
+            foodListString = newFoodText
+        } else {
+            foodListString = newFoodText + " (" + quantityText + ") "
+        }
         
         delegate?.doneButtonTapped(for: foodListString)
         self.dismiss(animated: true, completion: nil)
@@ -65,14 +73,22 @@ class AddItemViewController: UIViewController {
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if !keyboardIsShowing {
-            self.view.frame.origin.y -= Constants.keyboardHeight
+            let userInfo:NSDictionary = notification.userInfo! as NSDictionary
+            let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            self.view.frame.origin.y -= keyboardHeight - 24.0
             keyboardIsShowing = true
         }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
         if keyboardIsShowing {
-            self.view.frame.origin.y += Constants.keyboardHeight
+            let userInfo:NSDictionary = notification.userInfo! as NSDictionary
+            let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            self.view.frame.origin.y += keyboardHeight - 24.0
             keyboardIsShowing = false
         }
     }

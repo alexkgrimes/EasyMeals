@@ -130,9 +130,9 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
         
-        if editingStyle == UITableViewCellEditingStyle.delete {
-            meal.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        if editingStyle == .delete {
+            fullPlan.plan[date]?.day[planHeaders[indexPath.section]]!.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.reloadData()
         }
     }
@@ -208,8 +208,10 @@ extension YourPlanViewController: AddFoodDelegate {
         guard let mealTapped = mealTapped, let date = dateSelected else {
             return
         }
-        fullPlan.plan[date]?.day[mealTapped]?.append(newFood)
-        tableView.reloadData()
+        if newFood != "" {
+            fullPlan.plan[date]?.day[mealTapped]?.append(newFood)
+            tableView.reloadData()
+        }
     }
 }
 
