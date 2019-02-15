@@ -92,6 +92,7 @@ class YourPlanViewController: UIViewController {
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if let controller = segue.destination as? AddItemViewController {
             controller.delegate = self
             controller.transitioningDelegate = slideInTransitioningDelegate
@@ -126,18 +127,18 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        guard let date = dateSelected, let dayPlan = fullPlan.plan[date], var meal = dayPlan.day[planHeaders[indexPath.section]] else {
+        guard let date = dateSelected, let dayPlan = fullPlan.plan[date], var _ = dayPlan.day[planHeaders[indexPath.section]] else {
             return
         }
         
         if editingStyle == .delete {
             fullPlan.plan[date]?.day[planHeaders[indexPath.section]]!.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.reloadData()
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let containerView = UIView()
         let header = tableView.dequeueReusableCell(withIdentifier: "mealHeaderCell") as! MealHeaderCell
         let violet = hexStringToUIColor(hex: "6c71c4")
 
@@ -146,11 +147,19 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
         header.addItemButton.setTitleColor(.white, for: .normal)
         
         header.contentView.backgroundColor = violet
-        header.layer.cornerRadius = Constants.cornerRadius
-        header.layer.borderWidth = 0
+        header.contentView.layer.cornerRadius = Constants.cornerRadius
+        header.contentView.layer.borderWidth = 0
         
         header.delegate = self
-        return header
+        
+        containerView.addSubview(header)
+        return containerView
+        
+        //return header
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return planHeaders[section]
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -158,6 +167,7 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        print(planHeaders.count)
         return planHeaders.count
     }
 }
@@ -205,6 +215,8 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
 extension YourPlanViewController: AddFoodDelegate {
     func doneButtonTapped(for newFood: String)
     {
+        print(newFood)
+        print(mealTapped)
         guard let mealTapped = mealTapped, let date = dateSelected else {
             return
         }

@@ -1,0 +1,6 @@
+framework module Pods_EasyMealsTests {
+  umbrella header "Pods-EasyMealsTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
