@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class YourPlanViewController: UIViewController {
 
@@ -37,6 +38,9 @@ class YourPlanViewController: UIViewController {
     let calendarMonths = ["Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov"]
     let planHeaders = ["Breakfast", "Lunch", "Dinner", "Snacks", "Fluids"]
     
+
+    
+    
     var daysInCalendarCells: [String] = []
     var datesInCalendarCells: [String] = []
     
@@ -51,10 +55,14 @@ class YourPlanViewController: UIViewController {
     
     var fullPlan = FullPlan()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+            let rootRef = Database.database().reference()
         
         // Set up calendar
+        let datesRef = rootRef.child("dates")
+        
         let calendar = Calendar.current
         for indexPathForCell in 0...Constants.numberOfCalendarCells {
             let dateForCell = calendar.date(byAdding: .day, value: indexPathForCell, to: Date())!
@@ -66,14 +74,11 @@ class YourPlanViewController: UIViewController {
             datesInCalendarCells.append(calendarMonths[month % numMonthsInYear] + " \(date)")
         }
         
-        // Set up data for tableview
-//        planHeaders.forEach { header in
-//            meals[header] = []
-//        }
-        
         dateSelected = datesInCalendarCells[0]
         for date in datesInCalendarCells {
             fullPlan.plan[date] = DayPlan()
+            let dateRef = datesRef.child(date)
+            dateRef.setValue(date)
             for header in planHeaders {
                 fullPlan.plan[date]?.day[header] = []
             }
@@ -167,7 +172,6 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        print(planHeaders.count)
         return planHeaders.count
     }
 }
@@ -215,14 +219,18 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
 extension YourPlanViewController: AddFoodDelegate {
     func doneButtonTapped(for newFood: String)
     {
-        print(newFood)
-        print(mealTapped)
         guard let mealTapped = mealTapped, let date = dateSelected else {
             return
         }
         if newFood != "" {
             fullPlan.plan[date]?.day[mealTapped]?.append(newFood)
             tableView.reloadData()
+            
+//            // 3
+//            let newFood = self.ref.child(newFood.lowercased())
+//
+//            // 4
+//            groceryItemRef.setValue(newFood.toAnyObject())
         }
     }
 }

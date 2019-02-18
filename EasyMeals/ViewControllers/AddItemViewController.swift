@@ -45,7 +45,6 @@ class AddItemViewController: UIViewController {
             foodListString = newFoodText + " (" + quantityText + ") "
         }
         
-        print(foodListString)
         delegate?.doneButtonTapped(for: foodListString)
         self.dismiss(animated: true, completion: nil)
     }

@@ -15,3 +15,8 @@ target 'EasyMeals' do
 end
 pod 'Firebase/Core'
 pod 'Firebase/Database'
+
+target 'MyAppTests' do
+  inherit! :search_paths
+  pod 'Firebase'
+  end
