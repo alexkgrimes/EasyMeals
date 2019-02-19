@@ -42,7 +42,7 @@ class AddItemViewController: UIViewController {
         } else if quantityText == "" {
             foodListString = newFoodText
         } else {
-            foodListString = newFoodText + " (" + quantityText + ") "
+            foodListString = newFoodText + " (" + quantityText + ")"
         }
         
         delegate?.doneButtonTapped(for: foodListString)

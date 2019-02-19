@@ -38,9 +38,6 @@ class YourPlanViewController: UIViewController {
     let calendarMonths = ["Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov"]
     let planHeaders = ["Breakfast", "Lunch", "Dinner", "Snacks", "Fluids"]
     
-
-    
-    
     var daysInCalendarCells: [String] = []
     var datesInCalendarCells: [String] = []
     
@@ -58,7 +55,7 @@ class YourPlanViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            let rootRef = Database.database().reference()
+        let rootRef = Database.database().reference()
         
         // Set up calendar
         let datesRef = rootRef.child("dates")
@@ -78,9 +75,10 @@ class YourPlanViewController: UIViewController {
         for date in datesInCalendarCells {
             fullPlan.plan[date] = DayPlan()
             let dateRef = datesRef.child(date)
-            dateRef.setValue(date)
             for header in planHeaders {
                 fullPlan.plan[date]?.day[header] = []
+                let mealRef = dateRef.child(header)
+                mealRef.setValue(header)
             }
         }
             
@@ -159,8 +157,6 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
         
         containerView.addSubview(header)
         return containerView
-        
-        //return header
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -223,14 +219,13 @@ extension YourPlanViewController: AddFoodDelegate {
             return
         }
         if newFood != "" {
+            let mealRef = Database.database().reference(withPath : "dates/" + date + "/" + mealTapped)
+            
+            let newFoodRef = mealRef.child(newFood)
+            newFoodRef.setValue(newFood)
+            
             fullPlan.plan[date]?.day[mealTapped]?.append(newFood)
             tableView.reloadData()
-            
-//            // 3
-//            let newFood = self.ref.child(newFood.lowercased())
-//
-//            // 4
-//            groceryItemRef.setValue(newFood.toAnyObject())
         }
     }
 }
