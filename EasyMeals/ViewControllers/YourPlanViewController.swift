@@ -48,6 +48,7 @@ class YourPlanViewController: UIViewController {
     
     struct DayPlan {
         var day: [String : [String]] = [:]
+
     }
     
     var fullPlan = FullPlan()
@@ -75,10 +76,13 @@ class YourPlanViewController: UIViewController {
         for date in datesInCalendarCells {
             fullPlan.plan[date] = DayPlan()
             let dateRef = datesRef.child(date)
+            // dateRef.setValue(date as Any?)
             for header in planHeaders {
                 fullPlan.plan[date]?.day[header] = []
+                
+                
                 let mealRef = dateRef.child(header)
-                mealRef.setValue(header)
+                // mealRef.setValue(header as Any?)
             }
         }
             
@@ -86,7 +90,49 @@ class YourPlanViewController: UIViewController {
         calendarFlowLayout.minimumLineSpacing = 4
         calendarFlowLayout.minimumInteritemSpacing = 4
         calendarFlowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 8)
+        
+        // Firebase
+        rootRef.observe(.value, with: { snapshot in
+            
+            var newFullPlan = FullPlan()
+            //print(snapshot.value as Any)
+            
+            for child in snapshot.children {
+                guard let snapshot = child as? DataSnapshot else { return }
+                
+                //print(snapshot.value as Any)
+                
+                for dateChild in snapshot.children {
+                    guard let dateSnapshot = dateChild as? DataSnapshot else { return }
+                    
+                    //print(dateSnapshot.key as Any)
+                    let date = dateSnapshot.key
+                    
+                    for mealChild in dateSnapshot.children {
+                        guard let mealSnapshot = mealChild as? DataSnapshot else { return }
+                        
+                        //print(mealSnapshot.key as Any)
+                        let meal = mealSnapshot.key
+                        var newMeal : [String] = []
+                        
+                        for itemChild in mealSnapshot.children {
+                            guard let itemSnapshot = itemChild as? DataSnapshot else { return }
+                            
+                            let item = itemSnapshot.key
+                            newMeal.append(item)
+                            
+                        }
+                        
+                        self.fullPlan.plan[date]?.day[meal] = newMeal
+                        
+                    }
+                }
+            }
+            self.tableView.reloadData()
+        })
+
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -130,13 +176,21 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        guard let date = dateSelected, let dayPlan = fullPlan.plan[date], var _ = dayPlan.day[planHeaders[indexPath.section]] else {
+        guard let date : String = dateSelected, let dayPlan = fullPlan.plan[date], var _ = dayPlan.day[planHeaders[indexPath.section]] else {
             return
         }
         
         if editingStyle == .delete {
+            let mealItem : String = (fullPlan.plan[date]?.day[planHeaders[indexPath.section]]![indexPath.row])!
+            
             fullPlan.plan[date]?.day[planHeaders[indexPath.section]]!.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            let path = "dates/" + date + "/"
+            let subPath = mealTapped! + "/" + mealItem
+            let fullPath = path + subPath
+            let mealItemRef = Database.database().reference(withPath: fullPath)
+            mealItemRef.removeValue()
         }
     }
     
@@ -224,7 +278,7 @@ extension YourPlanViewController: AddFoodDelegate {
             let newFoodRef = mealRef.child(newFood)
             newFoodRef.setValue(newFood)
             
-            fullPlan.plan[date]?.day[mealTapped]?.append(newFood)
+            //fullPlan.plan[date]?.day[mealTapped]?.append(newFood)
             tableView.reloadData()
         }
     }
