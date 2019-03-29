@@ -168,7 +168,7 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.deleteRows(at: [indexPath], with: .automatic)
             
             let path = "dates/" + date + "/"
-            let subPath = mealTapped! + "/" + mealItem
+            let subPath = planHeaders[indexPath.section] + "/" + mealItem
             let fullPath = path + subPath
             let mealItemRef = Database.database().reference(withPath: fullPath)
             mealItemRef.removeValue()
@@ -258,8 +258,7 @@ extension YourPlanViewController: AddFoodDelegate {
             
             let newFoodRef = mealRef.child(newFood)
             newFoodRef.setValue(newFood)
-            
-            //fullPlan.plan[date]?.day[mealTapped]?.append(newFood)
+        
             tableView.reloadData()
         }
     }
