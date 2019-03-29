@@ -41,14 +41,12 @@ class YourPlanViewController: UIViewController {
     var daysInCalendarCells: [String] = []
     var datesInCalendarCells: [String] = []
     
-    // var meals: [String : [String]] = [:]
     struct FullPlan {
         var plan: [String : DayPlan] = [:]
     }
     
     struct DayPlan {
         var day: [String : [String]] = [:]
-
     }
     
     var fullPlan = FullPlan()
@@ -59,7 +57,6 @@ class YourPlanViewController: UIViewController {
         let rootRef = Database.database().reference()
         
         // Set up calendar
-        let datesRef = rootRef.child("dates")
         
         let calendar = Calendar.current
         for indexPathForCell in 0...Constants.numberOfCalendarCells {
@@ -75,14 +72,9 @@ class YourPlanViewController: UIViewController {
         dateSelected = datesInCalendarCells[0]
         for date in datesInCalendarCells {
             fullPlan.plan[date] = DayPlan()
-            let dateRef = datesRef.child(date)
-            // dateRef.setValue(date as Any?)
+
             for header in planHeaders {
                 fullPlan.plan[date]?.day[header] = []
-                
-                
-                let mealRef = dateRef.child(header)
-                // mealRef.setValue(header as Any?)
             }
         }
             
@@ -94,24 +86,17 @@ class YourPlanViewController: UIViewController {
         // Firebase
         rootRef.observe(.value, with: { snapshot in
             
-            var newFullPlan = FullPlan()
-            //print(snapshot.value as Any)
-            
             for child in snapshot.children {
                 guard let snapshot = child as? DataSnapshot else { return }
                 
-                //print(snapshot.value as Any)
-                
                 for dateChild in snapshot.children {
                     guard let dateSnapshot = dateChild as? DataSnapshot else { return }
-                    
-                    //print(dateSnapshot.key as Any)
+
                     let date = dateSnapshot.key
                     
                     for mealChild in dateSnapshot.children {
                         guard let mealSnapshot = mealChild as? DataSnapshot else { return }
-                        
-                        //print(mealSnapshot.key as Any)
+
                         let meal = mealSnapshot.key
                         var newMeal : [String] = []
                         
@@ -120,19 +105,15 @@ class YourPlanViewController: UIViewController {
                             
                             let item = itemSnapshot.key
                             newMeal.append(item)
-                            
                         }
                         
                         self.fullPlan.plan[date]?.day[meal] = newMeal
-                        
                     }
                 }
             }
             self.tableView.reloadData()
         })
-
     }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
