@@ -12,6 +12,7 @@
 		FA06DBCA2127B10A005BB399 /* AddFoodPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06DBC92127B10A005BB399 /* AddFoodPresentationController.swift */; };
 		FA06DBCC2127B485005BB399 /* SlideInPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06DBCB2127B485005BB399 /* SlideInPresentationManager.swift */; };
 		FA0849A021266657002F4E3B /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08499F21266657002F4E3B /* AddItemViewController.swift */; };
+		FA5D950D224E8B81002BA6CB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5D950C224E8B81002BA6CB /* LoginViewController.swift */; };
 		FA7C79E7221A61BB007BF9BF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA7C79E6221A61BB007BF9BF /* GoogleService-Info.plist */; };
 		FA7C79E8221A61BB007BF9BF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA7C79E6221A61BB007BF9BF /* GoogleService-Info.plist */; };
 		FAF643A921211AFC00327A19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF643A821211AFC00327A19 /* AppDelegate.swift */; };
@@ -44,6 +45,7 @@
 		FA06DBC92127B10A005BB399 /* AddFoodPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodPresentationController.swift; sourceTree = "<group>"; };
 		FA06DBCB2127B485005BB399 /* SlideInPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationManager.swift; sourceTree = "<group>"; };
 		FA08499F21266657002F4E3B /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		FA5D950C224E8B81002BA6CB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FA7C79E6221A61BB007BF9BF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FAF643A521211AFC00327A19 /* EasyMeals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyMeals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF643A821211AFC00327A19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			children = (
 				FAF643AA21211AFC00327A19 /* YourPlanViewController.swift */,
 				FA08499F21266657002F4E3B /* AddItemViewController.swift */,
+				FA5D950C224E8B81002BA6CB /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA5D950D224E8B81002BA6CB /* LoginViewController.swift in Sources */,
 				FAF643AB21211AFC00327A19 /* YourPlanViewController.swift in Sources */,
 				FAF643CD212285B900327A19 /* MealHeaderCell.swift in Sources */,
 				FAF643C9212267B100327A19 /* CalendarCell.swift in Sources */,
