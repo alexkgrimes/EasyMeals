@@ -44,7 +44,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="jdR-pO-h2v"/>
+                                    <action selector="loginButtonPressed:" destination="83t-Ds-fNx" eventType="touchUpInside" id="Amx-N2-Pmd"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="rk1-XF-1ys"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iun-mx-g4Z">
@@ -57,7 +58,7 @@
                                 <rect key="frame" x="69" y="250" width="233" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Easy Meals" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4q-8Z-iH6">
                                 <rect key="frame" x="60" y="116" width="254" height="41"/>
@@ -108,7 +109,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PoU-hr-Jec" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-961" y="32"/>
+            <point key="canvasLocation" x="-881" y="32"/>
         </scene>
         <!--Your Plan-->
         <scene sceneID="tne-QT-ifu">
@@ -258,7 +259,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Your Plan" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="never" id="Otc-Vw-c6a"/>
+                    <navigationItem key="navigationItem" title="Your Plan" largeTitleDisplayMode="never" id="Otc-Vw-c6a"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="calendarCollectionView" destination="1lH-Pm-7ny" id="k6m-Rp-JL4"/>

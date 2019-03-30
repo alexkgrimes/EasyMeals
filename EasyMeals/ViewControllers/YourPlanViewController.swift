@@ -54,6 +54,9 @@ class YourPlanViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.leftItemsSupplementBackButton = false
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(backAction))
+        
         let rootRef = Database.database().reference()
         
         // Set up calendar
@@ -113,6 +116,10 @@ class YourPlanViewController: UIViewController {
             }
             self.tableView.reloadData()
         })
+    }
+    
+    @objc func backAction(){
+        navigationController?.popViewController(animated: true)
     }
 
     override func didReceiveMemoryWarning() {

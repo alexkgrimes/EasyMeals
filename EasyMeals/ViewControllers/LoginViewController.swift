@@ -18,21 +18,42 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signupButton: UIButton!
     
+    @IBAction func loginButtonPressed(_ sender: UIButton) {
+        guard let email = emailTextField.text, let password = passwordTextField.text else {
+            return
+        }
+        
+        if email != "alexkgrimes@gmail.com" {
+            let alertController = UIAlertController(title: "Email Incorrect", message: nil, preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
+        if password != "password" {
+            let alertController = UIAlertController(title: "Password Incorrect", message: nil, preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    var goodEmail = false
+    var goodPassword = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
     }
     
-
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        return
+//    }
 
 }
