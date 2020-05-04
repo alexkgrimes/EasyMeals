@@ -46,6 +46,7 @@
 		FA06DBCB2127B485005BB399 /* SlideInPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationManager.swift; sourceTree = "<group>"; };
 		FA08499F21266657002F4E3B /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		FA5D950C224E8B81002BA6CB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		FA5D950E22501BFA002BA6CB /* EasyMeals.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EasyMeals.entitlements; sourceTree = "<group>"; };
 		FA7C79E6221A61BB007BF9BF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FAF643A521211AFC00327A19 /* EasyMeals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyMeals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF643A821211AFC00327A19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +156,7 @@
 		FAF643A721211AFC00327A19 /* EasyMeals */ = {
 			isa = PBXGroup;
 			children = (
+				FA5D950E22501BFA002BA6CB /* EasyMeals.entitlements */,
 				FAF643A821211AFC00327A19 /* AppDelegate.swift */,
 				FA06DBCF2129B878005BB399 /* StoryBoards */,
 				FA06DBCD2129B7B9005BB399 /* ViewControllers */,
@@ -238,6 +240,11 @@
 				TargetAttributes = {
 					FAF643A421211AFC00327A19 = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
 					};
 					FAF643B821211AFD00327A19 = {
 						CreatedOnToolsVersion = 9.4.1;

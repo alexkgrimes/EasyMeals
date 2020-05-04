@@ -30,6 +30,8 @@ class YourPlanViewController: UIViewController {
         return calendarMonths.count
     }
     
+    let orange = UIColor(red: 255.0 / 255.0, green: 149.0 / 255.0, blue: 0, alpha: 1.0)
+    
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
     var mealTapped: String? = nil
     var dateSelected: String? = nil
@@ -54,8 +56,12 @@ class YourPlanViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.leftItemsSupplementBackButton = false
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(backAction))
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
+        navigationItem.hidesBackButton = true
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(backAction))
         
         let rootRef = Database.database().reference()
         
@@ -114,7 +120,7 @@ class YourPlanViewController: UIViewController {
                     }
                 }
             }
-            self.tableView.reloadData()
+            self.updateTableView()
         })
     }
     
@@ -134,6 +140,15 @@ class YourPlanViewController: UIViewController {
             controller.delegate = self
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
+        }
+    }
+    
+    func updateTableView() {
+        tableView.reloadData()
+        if (tableView.contentSize.height < tableView.frame.size.height) {
+            tableView.isScrollEnabled = false
+        } else {
+            tableView.isScrollEnabled = true
         }
     }
 }
@@ -173,7 +188,7 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
             
             fullPlan.plan[date]?.day[planHeaders[indexPath.section]]!.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
-            
+
             let path = "dates/" + date + "/"
             let subPath = planHeaders[indexPath.section] + "/" + mealItem
             let fullPath = path + subPath
@@ -183,22 +198,19 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let containerView = UIView()
         let header = tableView.dequeueReusableCell(withIdentifier: "mealHeaderCell") as! MealHeaderCell
-        let violet = hexStringToUIColor(hex: "6c71c4")
+        // let violet = hexStringToUIColor(hex: "6c71c4")
 
         header.mealNameLabel.text = planHeaders[section]
         header.mealNameLabel.textColor = .white
         header.addItemButton.setTitleColor(.white, for: .normal)
         
-        header.contentView.backgroundColor = violet
+        header.contentView.backgroundColor = orange
         header.contentView.layer.cornerRadius = Constants.cornerRadius
         header.contentView.layer.borderWidth = 0
         
         header.delegate = self
-        
-        containerView.addSubview(header)
-        return containerView
+        return header
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -207,6 +219,16 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return Constants.tableViewHeaderHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 8.0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = UIView()
+        footer.backgroundColor = .white
+        return footer
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -223,15 +245,21 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "calendarCell", for: indexPath) as! CalendarCell
-        let cyan = hexStringToUIColor(hex: "2aa198")
         
         cell.dayLabel.text = daysInCalendarCells[indexPath.row]
         cell.dateLabel.text = datesInCalendarCells[indexPath.row]
         cell.dayLabel.textColor = .white
         cell.dateLabel.textColor = .white
         
-        cell.backgroundColor = cyan
+        cell.backgroundColor = .gray
         cell.layer.cornerRadius = Constants.cornerRadius
+        
+        if cell.dateLabel.text == dateSelected {
+            cell.layer.borderColor = orange.cgColor
+            cell.layer.borderWidth = 3.0
+        } else {
+            cell.layer.borderWidth = 0
+        }
         
         return cell
     }
@@ -239,7 +267,11 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         dateSelected = datesInCalendarCells[indexPath.row]
-        tableView.reloadData()
+        updateTableView()
+        collectionView.reloadData()
+        
+        cell?.layer.borderColor = orange.cgColor
+        cell?.layer.borderWidth = 3.0
         
         //Briefly fade the cell on selection
         UIView.animate(withDuration: 0.3, animations: {
@@ -255,8 +287,7 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
 // MARK: - AddFoodDelegate
 
 extension YourPlanViewController: AddFoodDelegate {
-    func doneButtonTapped(for newFood: String)
-    {
+    func doneButtonTapped(for newFood: String) {
         guard let mealTapped = mealTapped, let date = dateSelected else {
             return
         }
@@ -266,7 +297,7 @@ extension YourPlanViewController: AddFoodDelegate {
             let newFoodRef = mealRef.child(newFood)
             newFoodRef.setValue(newFood)
         
-            tableView.reloadData()
+            updateTableView()
         }
     }
 }

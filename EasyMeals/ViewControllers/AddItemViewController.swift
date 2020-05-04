@@ -51,6 +51,8 @@ class AddItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        doneAddingButton.layer.cornerRadius = 14.0
+        doneAddingButton.layer.masksToBounds = true
         // Do any additional setup after loading the view.
     }
 
@@ -77,7 +79,7 @@ class AddItemViewController: UIViewController {
             let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            self.view.frame.origin.y -= keyboardHeight - 24.0
+            self.view.frame.origin.y -= keyboardHeight / 2.0 + 36.0
             keyboardIsShowing = true
         }
     }
@@ -88,7 +90,7 @@ class AddItemViewController: UIViewController {
             let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            self.view.frame.origin.y += keyboardHeight - 24.0
+            self.view.frame.origin.y += keyboardHeight / 2.0 + 36.0
             keyboardIsShowing = false
         }
     }
