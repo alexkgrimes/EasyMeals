@@ -45,7 +45,6 @@
                                 </state>
                                 <connections>
                                     <action selector="loginButtonPressed:" destination="83t-Ds-fNx" eventType="touchUpInside" id="Amx-N2-Pmd"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="rk1-XF-1ys"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iun-mx-g4Z">
@@ -70,6 +69,9 @@
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="signUpButtonPressed:" destination="83t-Ds-fNx" eventType="touchUpInside" id="moK-6T-dSC"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sign In" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4q-8Z-iH6">
                                 <rect key="frame" x="68" y="96" width="254" height="55"/>
@@ -115,7 +117,7 @@
         <!--Your Plan-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Your Plan" id="BYZ-38-t0r" customClass="YourPlanViewController" customModule="EasyMeals" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="YourPlanViewController" title="Your Plan" id="BYZ-38-t0r" customClass="YourPlanViewController" customModule="EasyMeals" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

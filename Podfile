@@ -6,6 +6,9 @@ target 'EasyMeals' do
   use_frameworks!
 
   # Pods for EasyMeals
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
 
   target 'EasyMealsTests' do
     inherit! :search_paths
@@ -13,10 +16,3 @@ target 'EasyMeals' do
   end
 
 end
-pod 'Firebase/Core'
-pod 'Firebase/Database'
-
-target 'MyAppTests' do
-  inherit! :search_paths
-  pod 'Firebase'
-  end

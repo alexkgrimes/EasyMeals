@@ -23,21 +23,15 @@ class LoginViewController: UIViewController {
             return
         }
         
-        if email != "alexkgrimes@gmail.com" {
-            let alertController = UIAlertController(title: "Email Incorrect", message: nil, preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            
-            alertController.addAction(defaultAction)
-            self.present(alertController, animated: true, completion: nil)
+        AuthController.signIn(output: self, email, password: password)
+    }
+    
+    @IBAction func signUpButtonPressed(_ sender: Any) {
+        guard let email = emailTextField.text, let password = passwordTextField.text else {
+            return
         }
         
-        if password != "password" {
-            let alertController = UIAlertController(title: "Password Incorrect", message: nil, preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            
-            alertController.addAction(defaultAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
+        AuthController.signUp(output: self, email, password: password)
     }
     
     var goodEmail = false
@@ -56,11 +50,28 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         
     }
-    
-    // MARK: - Navigation
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        return
-//    }
+}
 
+extension LoginViewController: AuthControllerOutput {
+    func signInFailed() {
+        let alertController = UIAlertController(title: "Login Failed", message: nil, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        
+        alertController.addAction(defaultAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func signInSuccess() {
+        if let viewController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "YourPlanViewController") as? YourPlanViewController {
+            navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func createUserFailed() {
+        let alertController = UIAlertController(title: "Failed to Sign Up", message: "Please try again.", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        
+        alertController.addAction(defaultAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
 }

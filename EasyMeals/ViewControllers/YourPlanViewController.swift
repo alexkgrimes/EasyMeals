@@ -125,7 +125,7 @@ class YourPlanViewController: UIViewController {
     }
     
     @objc func backAction(){
-        navigationController?.popViewController(animated: true)
+        AuthController.signOut(output: self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -310,6 +310,13 @@ extension YourPlanViewController: CreateMealDelegate {
     }
 }
 
+// MARK: - AuthControllerLogout
+
+extension YourPlanViewController: AuthControllerLogout {
+    func signOut() {
+        navigationController?.popViewController(animated: true)
+    }
+}
 
 // MARK: - Colors
 

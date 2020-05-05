@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,8 @@
 		FA06DBCA2127B10A005BB399 /* AddFoodPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06DBC92127B10A005BB399 /* AddFoodPresentationController.swift */; };
 		FA06DBCC2127B485005BB399 /* SlideInPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06DBCB2127B485005BB399 /* SlideInPresentationManager.swift */; };
 		FA0849A021266657002F4E3B /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08499F21266657002F4E3B /* AddItemViewController.swift */; };
+		FA3558BE245FD67D00F3B377 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3558BD245FD67D00F3B377 /* AuthController.swift */; };
+		FA3558C0245FD74900F3B377 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3558BF245FD74900F3B377 /* DataController.swift */; };
 		FA5D950D224E8B81002BA6CB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5D950C224E8B81002BA6CB /* LoginViewController.swift */; };
 		FA7C79E7221A61BB007BF9BF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA7C79E6221A61BB007BF9BF /* GoogleService-Info.plist */; };
 		FA7C79E8221A61BB007BF9BF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA7C79E6221A61BB007BF9BF /* GoogleService-Info.plist */; };
@@ -45,6 +47,8 @@
 		FA06DBC92127B10A005BB399 /* AddFoodPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodPresentationController.swift; sourceTree = "<group>"; };
 		FA06DBCB2127B485005BB399 /* SlideInPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationManager.swift; sourceTree = "<group>"; };
 		FA08499F21266657002F4E3B /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		FA3558BD245FD67D00F3B377 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
+		FA3558BF245FD74900F3B377 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		FA5D950C224E8B81002BA6CB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FA5D950E22501BFA002BA6CB /* EasyMeals.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EasyMeals.entitlements; sourceTree = "<group>"; };
 		FA7C79E6221A61BB007BF9BF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 				FAF643AF21211AFD00327A19 /* Assets.xcassets */,
 				FAF643B421211AFD00327A19 /* Info.plist */,
 				FA7C79E6221A61BB007BF9BF /* GoogleService-Info.plist */,
+				FA3558BD245FD67D00F3B377 /* AuthController.swift */,
+				FA3558BF245FD74900F3B377 /* DataController.swift */,
 			);
 			path = EasyMeals;
 			sourceTree = "<group>";
@@ -322,20 +328,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EasyMeals/Pods-EasyMeals-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-EasyMeals/Pods-EasyMeals-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-EasyMeals/Pods-EasyMeals-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -376,8 +373,10 @@
 				FAF643CD212285B900327A19 /* MealHeaderCell.swift in Sources */,
 				FAF643C9212267B100327A19 /* CalendarCell.swift in Sources */,
 				FAF643A921211AFC00327A19 /* AppDelegate.swift in Sources */,
+				FA3558C0245FD74900F3B377 /* DataController.swift in Sources */,
 				FA06DBCC2127B485005BB399 /* SlideInPresentationManager.swift in Sources */,
 				FAF643CB21227C7D00327A19 /* MealItemCell.swift in Sources */,
+				FA3558BE245FD67D00F3B377 /* AuthController.swift in Sources */,
 				FA0849A021266657002F4E3B /* AddItemViewController.swift in Sources */,
 				FA06DBCA2127B10A005BB399 /* AddFoodPresentationController.swift in Sources */,
 			);
