@@ -20,6 +20,11 @@ protocol AuthControllerLogout {
     func signOut()
 }
 
+protocol AuthControllerReset {
+    func resetSuccess()
+    func resetFailed()
+}
+
 final class AuthController {
     static let serviceName = "InventoryManagerService"
     
@@ -72,5 +77,15 @@ final class AuthController {
         }
         
         output.signOut()
+    }
+    
+    static func resetPassword(output: AuthControllerReset, email: String) {
+        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+            if error == nil {
+                output.resetSuccess()
+            } else {
+                output.resetFailed()
+            }
+        }
     }
 }

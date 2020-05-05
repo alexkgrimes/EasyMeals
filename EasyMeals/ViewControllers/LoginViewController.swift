@@ -34,6 +34,14 @@ class LoginViewController: UIViewController {
         AuthController.signUp(output: self, email, password: password)
     }
     
+    @IBAction func forgotPasswordButtonPressed(_ sender: Any) {
+        guard let email = emailTextField.text else {
+            return
+        }
+        
+        AuthController.resetPassword(output: self, email: email)
+    }
+    
     var goodEmail = false
     var goodPassword = false
     
@@ -69,6 +77,24 @@ extension LoginViewController: AuthControllerOutput {
     
     func createUserFailed() {
         let alertController = UIAlertController(title: "Failed to Sign Up", message: "Please try again.", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        
+        alertController.addAction(defaultAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension LoginViewController: AuthControllerReset {
+    func resetSuccess() {
+        let alertController = UIAlertController(title: "Success!", message: "A password reset has been sent to your email. Please check your inbox and follow the instructions to reset your password.", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        
+        alertController.addAction(defaultAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func resetFailed() {
+        let alertController = UIAlertController(title: "Invalid Email", message: "Please enter an email associated with an account", preferredStyle: .alert)
         let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         
         alertController.addAction(defaultAction)
