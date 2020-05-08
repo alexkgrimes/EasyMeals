@@ -17,6 +17,7 @@
 		FA5D950D224E8B81002BA6CB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5D950C224E8B81002BA6CB /* LoginViewController.swift */; };
 		FA7C79E7221A61BB007BF9BF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA7C79E6221A61BB007BF9BF /* GoogleService-Info.plist */; };
 		FA7C79E8221A61BB007BF9BF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA7C79E6221A61BB007BF9BF /* GoogleService-Info.plist */; };
+		FAD3517F2464F4C8007399BC /* FullPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3517E2464F4C8007399BC /* FullPlan.swift */; };
 		FAF643A921211AFC00327A19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF643A821211AFC00327A19 /* AppDelegate.swift */; };
 		FAF643AB21211AFC00327A19 /* YourPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF643AA21211AFC00327A19 /* YourPlanViewController.swift */; };
 		FAF643AE21211AFC00327A19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF643AC21211AFC00327A19 /* Main.storyboard */; };
@@ -52,6 +53,7 @@
 		FA5D950C224E8B81002BA6CB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FA5D950E22501BFA002BA6CB /* EasyMeals.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EasyMeals.entitlements; sourceTree = "<group>"; };
 		FA7C79E6221A61BB007BF9BF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FAD3517E2464F4C8007399BC /* FullPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPlan.swift; sourceTree = "<group>"; };
 		FAF643A521211AFC00327A19 /* EasyMeals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyMeals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF643A821211AFC00327A19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAF643AA21211AFC00327A19 /* YourPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPlanViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +139,14 @@
 			path = Presentors;
 			sourceTree = "<group>";
 		};
+		FAD3517D2464F4B1007399BC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FAD3517E2464F4C8007399BC /* FullPlan.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		FAF6439C21211AFC00327A19 = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +170,7 @@
 		FAF643A721211AFC00327A19 /* EasyMeals */ = {
 			isa = PBXGroup;
 			children = (
+				FAD3517D2464F4B1007399BC /* Models */,
 				FA5D950E22501BFA002BA6CB /* EasyMeals.entitlements */,
 				FAF643A821211AFC00327A19 /* AppDelegate.swift */,
 				FA06DBCF2129B878005BB399 /* StoryBoards */,
@@ -379,6 +390,7 @@
 				FA3558BE245FD67D00F3B377 /* AuthController.swift in Sources */,
 				FA0849A021266657002F4E3B /* AddItemViewController.swift in Sources */,
 				FA06DBCA2127B10A005BB399 /* AddFoodPresentationController.swift in Sources */,
+				FAD3517F2464F4C8007399BC /* FullPlan.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

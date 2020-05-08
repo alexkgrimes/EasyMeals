@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 
+let numberOfCalendarCells = 12
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -18,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
+        DataController.setUpDates()
+        
+        // Routing
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

@@ -22,37 +22,18 @@ class YourPlanViewController: UIViewController {
         static let tableViewHeaderHeight: CGFloat = 62.0
     }
     
-    var numDaysInWeek: Int {
-        return calendarDays.count
-    }
-    
-    var numMonthsInYear: Int {
-        return calendarMonths.count
-    }
-    
+    let calendar = Calendar.current
     let orange = UIColor(red: 255.0 / 255.0, green: 149.0 / 255.0, blue: 0, alpha: 1.0)
     
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
     var mealTapped: String? = nil
-    var dateSelected: String? = nil
+    var dateSelected: Date? = nil
     
-    let calendarDays = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"]
-    let calendarMonths = ["Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov"]
-    let planHeaders = ["Breakfast", "Lunch", "Dinner", "Snacks", "Fluids"]
-    
-    var daysInCalendarCells: [String] = []
-    var datesInCalendarCells: [String] = []
-    
-    struct FullPlan {
-        var plan: [String : DayPlan] = [:]
-    }
-    
-    struct DayPlan {
-        var day: [String : [String]] = [:]
-    }
-    
+    lazy var nsDates: [Date] = {
+        fullPlan.plan.keys.map { $0 }.sorted()
+    }()
+
     var fullPlan = FullPlan()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,69 +43,29 @@ class YourPlanViewController: UIViewController {
         navigationItem.hidesBackButton = true
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(backAction))
-        
-        let rootRef = Database.database().reference()
-        
-        // Set up calendar
-        
-        let calendar = Calendar.current
-        for indexPathForCell in 0...Constants.numberOfCalendarCells {
-            let dateForCell = calendar.date(byAdding: .day, value: indexPathForCell, to: Date())!
-            let dayOfTheWeek = calendar.component(.weekday, from: dateForCell)
-            let date = calendar.component(.day, from: dateForCell)
-            let month = calendar.component(.month, from: dateForCell)
-            
-            daysInCalendarCells.append(calendarDays[dayOfTheWeek % numDaysInWeek])
-            datesInCalendarCells.append(calendarMonths[month % numMonthsInYear] + " \(date)")
+           
+        guard let userId = AuthController.userId else {
+            return
         }
         
-        dateSelected = datesInCalendarCells[0]
-        for date in datesInCalendarCells {
-            fullPlan.plan[date] = DayPlan()
-
-            for header in planHeaders {
-                fullPlan.plan[date]?.day[header] = []
-            }
-        }
-            
+        let datesRef = Database.database().reference(withPath: "users/\(userId)/dates")
         calendarFlowLayout.scrollDirection = .horizontal
         calendarFlowLayout.minimumLineSpacing = 4
         calendarFlowLayout.minimumInteritemSpacing = 4
         calendarFlowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 8)
         
         // Firebase
-        rootRef.observe(.value, with: { snapshot in
-            
-            for child in snapshot.children {
-                guard let snapshot = child as? DataSnapshot else { return }
-                
-                for dateChild in snapshot.children {
-                    guard let dateSnapshot = dateChild as? DataSnapshot else { return }
-
-                    let date = dateSnapshot.key
-                    
-                    for mealChild in dateSnapshot.children {
-                        guard let mealSnapshot = mealChild as? DataSnapshot else { return }
-
-                        let meal = mealSnapshot.key
-                        var newMeal : [String] = []
-                        
-                        for itemChild in mealSnapshot.children {
-                            guard let itemSnapshot = itemChild as? DataSnapshot else { return }
-                            
-                            let item = itemSnapshot.key
-                            newMeal.append(item)
-                        }
-                        
-                        self.fullPlan.plan[date]?.day[meal] = newMeal
-                    }
-                }
+        datesRef.observe(.value, with: { snapshot in
+            self.fullPlan = FullPlan(snapshot: snapshot)
+            if self.dateSelected == nil {
+                self.dateSelected = self.nsDates.first
             }
             self.updateTableView()
+            self.calendarCollectionView.reloadData()
         })
     }
     
-    @objc func backAction(){
+    @objc func backAction() {
         AuthController.signOut(output: self)
     }
 
@@ -157,7 +98,7 @@ class YourPlanViewController: UIViewController {
 
 extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let date = dateSelected, let plan = fullPlan.plan[date], let numRows = plan.day[planHeaders[section]]?.count else {
+        guard let date = dateSelected, let plan = fullPlan.plan[date], let mealName = MealName(rawValue: mealNames[section]), let numRows = plan.day[mealName]?.count else {
             return 0
         }
         return numRows
@@ -165,7 +106,7 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mealItemCell", for: indexPath) as! MealItemCell
-        guard let date = dateSelected, let dayPlan = fullPlan.plan[date], let foods = dayPlan.day[planHeaders[indexPath.section]] else {
+        guard let date = dateSelected, let dayPlan = fullPlan.plan[date], let mealName = MealName(rawValue: mealNames[indexPath.section]), let foods = dayPlan.day[mealName] else {
             return cell
         }
         
@@ -179,20 +120,22 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        guard let date : String = dateSelected, let dayPlan = fullPlan.plan[date], var _ = dayPlan.day[planHeaders[indexPath.section]] else {
+        guard let date = dateSelected, let mealName = MealName(rawValue: mealNames[indexPath.section]), let mealItem = (fullPlan.plan[date]?.day[mealName]?[indexPath.row]) else {
             return
         }
         
         if editingStyle == .delete {
-            let mealItem : String = (fullPlan.plan[date]?.day[planHeaders[indexPath.section]]![indexPath.row])!
+            guard let userId = AuthController.userId else {
+                return
+            }
             
-            fullPlan.plan[date]?.day[planHeaders[indexPath.section]]!.remove(at: indexPath.row)
+            let datesRef = Database.database().reference(withPath: "users/\(userId)/dates")
+            
+            fullPlan.plan[date]?.day[mealName]!.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
 
-            let path = "dates/" + date + "/"
-            let subPath = planHeaders[indexPath.section] + "/" + mealItem
-            let fullPath = path + subPath
-            let mealItemRef = Database.database().reference(withPath: fullPath)
+            let dateString = formatter.string(from: date)
+            let mealItemRef = datesRef.child("\(dateString)/\(mealNames[indexPath.section])/\(mealItem)")
             mealItemRef.removeValue()
         }
     }
@@ -201,7 +144,7 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
         let header = tableView.dequeueReusableCell(withIdentifier: "mealHeaderCell") as! MealHeaderCell
         // let violet = hexStringToUIColor(hex: "6c71c4")
 
-        header.mealNameLabel.text = planHeaders[section]
+        header.mealNameLabel.text = mealNames[section]
         header.mealNameLabel.textColor = .white
         header.addItemButton.setTitleColor(.white, for: .normal)
         
@@ -214,7 +157,7 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return planHeaders[section]
+        return mealNames[section]
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -232,7 +175,7 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return planHeaders.count
+        return mealNames.count
     }
 }
 
@@ -240,21 +183,26 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Constants.numberOfCalendarCells
+        return fullPlan.plan.keys.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "calendarCell", for: indexPath) as! CalendarCell
         
-        cell.dayLabel.text = daysInCalendarCells[indexPath.row]
-        cell.dateLabel.text = datesInCalendarCells[indexPath.row]
+        let nsDate = nsDates[indexPath.row]
+        let date = calendar.component(.day, from: nsDate)
+        let weekday = calendar.component(.weekday, from: nsDate)
+        let month = calendar.component(.month, from: nsDate)
+        
+        cell.dayLabel.text = calendarDays[weekday - 1]
+        cell.dateLabel.text = calendarMonths[month - 1] + " \(date)"
         cell.dayLabel.textColor = .white
         cell.dateLabel.textColor = .white
         
         cell.backgroundColor = .gray
         cell.layer.cornerRadius = Constants.cornerRadius
         
-        if cell.dateLabel.text == dateSelected {
+        if nsDate == dateSelected {
             cell.layer.borderColor = orange.cgColor
             cell.layer.borderWidth = 3.0
         } else {
@@ -266,7 +214,7 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        dateSelected = datesInCalendarCells[indexPath.row]
+        dateSelected = nsDates[indexPath.row]
         updateTableView()
         collectionView.reloadData()
         
@@ -288,11 +236,14 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
 
 extension YourPlanViewController: AddFoodDelegate {
     func doneButtonTapped(for newFood: String) {
-        guard let mealTapped = mealTapped, let date = dateSelected else {
+        guard let mealTapped = mealTapped, let date = dateSelected, let userId = AuthController.userId else {
             return
         }
         if newFood != "" {
-            let mealRef = Database.database().reference(withPath : "dates/" + date + "/" + mealTapped)
+            
+            let datesRef = Database.database().reference(withPath: "users/\(userId)/dates")
+            let dateString = formatter.string(from: date)
+            let mealRef = datesRef.child("\(dateString)/\(mealTapped)")
             
             let newFoodRef = mealRef.child(newFood)
             newFoodRef.setValue(newFood)
