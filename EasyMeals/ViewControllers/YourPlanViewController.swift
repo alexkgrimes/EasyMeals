@@ -24,14 +24,9 @@ class YourPlanViewController: UIViewController {
     
     let calendar = Calendar.current
     let orange = UIColor(red: 255.0 / 255.0, green: 149.0 / 255.0, blue: 0, alpha: 1.0)
-    
-    lazy var slideInTransitioningDelegate = SlideInPresentationManager()
+
     var mealTapped: String? = nil
     var dateSelected: Date? = nil
-    
-    lazy var nsDates: [Date] = {
-        fullPlan.plan.keys.map { $0 }.sorted()
-    }()
 
     var fullPlan = FullPlan()
     
@@ -58,7 +53,7 @@ class YourPlanViewController: UIViewController {
         datesRef.observe(.value, with: { snapshot in
             self.fullPlan = FullPlan(snapshot: snapshot)
             if self.dateSelected == nil {
-                self.dateSelected = self.nsDates.first
+                self.dateSelected = self.fullPlan.plan.keys.map { $0 }.sorted().first
             }
             self.updateTableView()
             self.calendarCollectionView.reloadData()
@@ -79,8 +74,6 @@ class YourPlanViewController: UIViewController {
         
         if let controller = segue.destination as? AddItemViewController {
             controller.delegate = self
-            controller.transitioningDelegate = slideInTransitioningDelegate
-            controller.modalPresentationStyle = .custom
         }
     }
     
@@ -183,13 +176,26 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fullPlan.plan.keys.count
+        return fullPlan.plan.keys.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.row == fullPlan.plan.keys.count {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "moreCalendarCell", for: indexPath) as! MoreCalendarCell
+            let tapGesture = UITapGestureRecognizer(target: self, action: "pushMoreDatesView")
+            cell.isUserInteractionEnabled = true
+            cell.addGestureRecognizer(tapGesture)
+            cell.backgroundColor = .darkGray
+            cell.moreLabel.textColor = .white
+            cell.layer.borderColor = UIColor.lightGray.cgColor
+            cell.layer.borderWidth = 3.0
+            cell.layer.cornerRadius = Constants.cornerRadius
+            return cell
+        }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "calendarCell", for: indexPath) as! CalendarCell
         
-        let nsDate = nsDates[indexPath.row]
+        let nsDate = fullPlan.plan.keys.map { $0 }.sorted()[indexPath.row]
         let date = calendar.component(.day, from: nsDate)
         let weekday = calendar.component(.weekday, from: nsDate)
         let month = calendar.component(.month, from: nsDate)
@@ -214,21 +220,12 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        dateSelected = nsDates[indexPath.row]
+        dateSelected = fullPlan.plan.keys.map { $0 }.sorted()[indexPath.row]
         updateTableView()
         collectionView.reloadData()
         
         cell?.layer.borderColor = orange.cgColor
         cell?.layer.borderWidth = 3.0
-        
-        //Briefly fade the cell on selection
-        UIView.animate(withDuration: 0.3, animations: {
-            cell?.alpha = 0.5
-        }) { (completed) in
-            UIView.animate(withDuration: 0.3, animations: {
-                cell?.alpha = 1
-            })
-        }
     }
 }
 
@@ -293,6 +290,14 @@ extension YourPlanViewController {
             blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0)
         )
+    }
+}
+
+extension YourPlanViewController: MoreCalendarCellProtocol {
+    @objc func pushMoreDatesView() {
+        let viewController = UIViewController()
+        viewController.view.backgroundColor = .white
+        navigationController?.present(viewController, animated: true, completion: nil)
     }
 }
 

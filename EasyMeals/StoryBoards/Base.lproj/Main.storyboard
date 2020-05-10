@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -84,9 +85,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Forgot your password?"/>
-                                <connections>
-                                    <action selector="forgotPasswordButtonPressed:" destination="83t-Ds-fNx" eventType="touchUpInside" id="yw6-93-BfC"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -181,6 +179,31 @@
                                         <connections>
                                             <outlet property="dateLabel" destination="J9Y-aN-SJl" id="T3C-kG-I3O"/>
                                             <outlet property="dayLabel" destination="FAO-ui-dRf" id="s0T-jm-SEl"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" restorationIdentifier="moreCalendarCell" reuseIdentifier="moreCalendarCell" id="HdI-YD-Vo0" customClass="MoreCalendarCell" customModule="EasyMeals" customModuleProvider="target">
+                                        <rect key="frame" x="97.5" y="0.0" width="75" height="75"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="RQ7-mV-YeN" customClass="MoreCalendarCell" customModule="EasyMeals" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ef-FN-AtV">
+                                                    <rect key="frame" x="5" y="5" width="65" height="65"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="7Ef-FN-AtV" secondAttribute="bottom" constant="5" id="0Ob-VP-tvc"/>
+                                                <constraint firstItem="7Ef-FN-AtV" firstAttribute="leading" secondItem="RQ7-mV-YeN" secondAttribute="leading" constant="5" id="a4D-Ba-VND"/>
+                                                <constraint firstItem="7Ef-FN-AtV" firstAttribute="top" secondItem="RQ7-mV-YeN" secondAttribute="top" constant="5" id="eqr-9q-A0a"/>
+                                                <constraint firstAttribute="trailing" secondItem="7Ef-FN-AtV" secondAttribute="trailing" constant="5" id="yBQ-UH-hje"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="moreLabel" destination="7Ef-FN-AtV" id="DLw-be-tOa"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -305,10 +328,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7y-Wd-0Co">
-                                <rect key="frame" x="16" y="302" width="343" height="34"/>
+                                <rect key="frame" x="16" y="302" width="343" height="42"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="qEY-Ie-j3p" userLabel="height = 38"/>
+                                    <constraint firstAttribute="height" constant="42" id="qEY-Ie-j3p" userLabel="height = 38"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Add">

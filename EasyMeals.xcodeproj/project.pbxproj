@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		7C8AD383A66B504B47BFA380 /* Pods_EasyMeals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B2A07C2AB4E09AEE958F15 /* Pods_EasyMeals.framework */; };
 		8673F9D1BD1AD0831C9A0C44 /* Pods_EasyMealsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF9F96379099FAD2802DF1CD /* Pods_EasyMealsTests.framework */; };
-		FA06DBCA2127B10A005BB399 /* AddFoodPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06DBC92127B10A005BB399 /* AddFoodPresentationController.swift */; };
-		FA06DBCC2127B485005BB399 /* SlideInPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06DBCB2127B485005BB399 /* SlideInPresentationManager.swift */; };
 		FA0849A021266657002F4E3B /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08499F21266657002F4E3B /* AddItemViewController.swift */; };
 		FA3558BE245FD67D00F3B377 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3558BD245FD67D00F3B377 /* AuthController.swift */; };
 		FA3558C0245FD74900F3B377 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3558BF245FD74900F3B377 /* DataController.swift */; };
@@ -18,6 +16,7 @@
 		FA7C79E7221A61BB007BF9BF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA7C79E6221A61BB007BF9BF /* GoogleService-Info.plist */; };
 		FA7C79E8221A61BB007BF9BF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA7C79E6221A61BB007BF9BF /* GoogleService-Info.plist */; };
 		FAD3517F2464F4C8007399BC /* FullPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3517E2464F4C8007399BC /* FullPlan.swift */; };
+		FAD351812467909A007399BC /* MoreCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD351802467909A007399BC /* MoreCalendarCell.swift */; };
 		FAF643A921211AFC00327A19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF643A821211AFC00327A19 /* AppDelegate.swift */; };
 		FAF643AB21211AFC00327A19 /* YourPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF643AA21211AFC00327A19 /* YourPlanViewController.swift */; };
 		FAF643AE21211AFC00327A19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF643AC21211AFC00327A19 /* Main.storyboard */; };
@@ -45,8 +44,6 @@
 		7B9264794609FA0C82FB082F /* Pods-EasyMeals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyMeals.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyMeals/Pods-EasyMeals.release.xcconfig"; sourceTree = "<group>"; };
 		B0B2A07C2AB4E09AEE958F15 /* Pods_EasyMeals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyMeals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF9F96379099FAD2802DF1CD /* Pods_EasyMealsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyMealsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA06DBC92127B10A005BB399 /* AddFoodPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodPresentationController.swift; sourceTree = "<group>"; };
-		FA06DBCB2127B485005BB399 /* SlideInPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationManager.swift; sourceTree = "<group>"; };
 		FA08499F21266657002F4E3B /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		FA3558BD245FD67D00F3B377 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
 		FA3558BF245FD74900F3B377 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -54,6 +51,7 @@
 		FA5D950E22501BFA002BA6CB /* EasyMeals.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EasyMeals.entitlements; sourceTree = "<group>"; };
 		FA7C79E6221A61BB007BF9BF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FAD3517E2464F4C8007399BC /* FullPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPlan.swift; sourceTree = "<group>"; };
+		FAD351802467909A007399BC /* MoreCalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCalendarCell.swift; sourceTree = "<group>"; };
 		FAF643A521211AFC00327A19 /* EasyMeals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyMeals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF643A821211AFC00327A19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAF643AA21211AFC00327A19 /* YourPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPlanViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +115,7 @@
 				FAF643CC212285B900327A19 /* MealHeaderCell.swift */,
 				FAF643C8212267B100327A19 /* CalendarCell.swift */,
 				FAF643CA21227C7D00327A19 /* MealItemCell.swift */,
+				FAD351802467909A007399BC /* MoreCalendarCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -128,15 +127,6 @@
 				FAF643B121211AFD00327A19 /* LaunchScreen.storyboard */,
 			);
 			path = StoryBoards;
-			sourceTree = "<group>";
-		};
-		FA06DBD02129B8C1005BB399 /* Presentors */ = {
-			isa = PBXGroup;
-			children = (
-				FA06DBC92127B10A005BB399 /* AddFoodPresentationController.swift */,
-				FA06DBCB2127B485005BB399 /* SlideInPresentationManager.swift */,
-			);
-			path = Presentors;
 			sourceTree = "<group>";
 		};
 		FAD3517D2464F4B1007399BC /* Models */ = {
@@ -176,7 +166,6 @@
 				FA06DBCF2129B878005BB399 /* StoryBoards */,
 				FA06DBCD2129B7B9005BB399 /* ViewControllers */,
 				FA06DBCE2129B842005BB399 /* CustomCells */,
-				FA06DBD02129B8C1005BB399 /* Presentors */,
 				FAF643AF21211AFD00327A19 /* Assets.xcassets */,
 				FAF643B421211AFD00327A19 /* Info.plist */,
 				FA7C79E6221A61BB007BF9BF /* GoogleService-Info.plist */,
@@ -383,13 +372,12 @@
 				FAF643AB21211AFC00327A19 /* YourPlanViewController.swift in Sources */,
 				FAF643CD212285B900327A19 /* MealHeaderCell.swift in Sources */,
 				FAF643C9212267B100327A19 /* CalendarCell.swift in Sources */,
+				FAD351812467909A007399BC /* MoreCalendarCell.swift in Sources */,
 				FAF643A921211AFC00327A19 /* AppDelegate.swift in Sources */,
 				FA3558C0245FD74900F3B377 /* DataController.swift in Sources */,
-				FA06DBCC2127B485005BB399 /* SlideInPresentationManager.swift in Sources */,
 				FAF643CB21227C7D00327A19 /* MealItemCell.swift in Sources */,
 				FA3558BE245FD67D00F3B377 /* AuthController.swift in Sources */,
 				FA0849A021266657002F4E3B /* AddItemViewController.swift in Sources */,
-				FA06DBCA2127B10A005BB399 /* AddFoodPresentationController.swift in Sources */,
 				FAD3517F2464F4C8007399BC /* FullPlan.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

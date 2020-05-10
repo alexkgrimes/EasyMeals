@@ -37,11 +37,6 @@ final class DataController {
                     let date = formatter.date(from: dateString)!
                     let currentDate = formatter.date(from: formatter.string(from: Date()))
                     if date < currentDate! {
-                        let dateRef = datesRef.child(dateString)
-                        dateRef.removeValue { error, _ in
-                            print(error?.localizedDescription)
-                        }
-                    } else {
                         storedDates.append(dateString)
                     }
                 }
