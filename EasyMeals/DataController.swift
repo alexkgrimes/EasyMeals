@@ -34,11 +34,8 @@ final class DataController {
                     guard let dateSnapshot = dateChild as? DataSnapshot else { return }
 
                     let dateString  = dateSnapshot.key
-                    let date = formatter.date(from: dateString)!
-                    let currentDate = formatter.date(from: formatter.string(from: Date()))
-                    if date < currentDate! {
-                        storedDates.append(dateString)
-                    }
+                    // let date = formatter.date(from: dateString)!
+                    storedDates.append(dateString)
                 }
                 
                 // create the new ones

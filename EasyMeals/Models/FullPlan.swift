@@ -28,6 +28,12 @@ let formatter: DateFormatter = {
     return dateFormatter
 }()
 
+let fullFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "EEEE, MMM dd, yyyy"
+    return dateFormatter
+}()
+
 
 struct FullPlan {
     var plan: [Date : DayPlan] = [:] // [date: DayPlan]
@@ -63,6 +69,37 @@ struct FullPlan {
             }
         }
     }
+}
+
+struct PlanCurrent {
+    var plan: [Date: DayPlan] = [:]
+    
+    public init() {}
+    
+    public init(fullPlan: FullPlan) {
+        for date in fullPlan.plan.keys {
+            let currentDate = formatter.date(from: formatter.string(from: Date()))!
+            if date >= currentDate {
+                plan[date] = fullPlan.plan[date]
+            }
+        }
+    }
+}
+
+struct PlanHistory {
+    var plan: [Date: DayPlan] = [:]
+    
+    public init() {}
+    
+    public init(fullPlan: FullPlan) {
+        for date in fullPlan.plan.keys {
+            let currentDate = formatter.date(from: formatter.string(from: Date()))!
+            if date < currentDate {
+                plan[date] = fullPlan.plan[date]
+            }
+        }
+    }
+    
 }
 
 struct DayPlan {

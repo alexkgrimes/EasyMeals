@@ -27,8 +27,9 @@ class YourPlanViewController: UIViewController {
 
     var mealTapped: String? = nil
     var dateSelected: Date? = nil
-
+    
     var fullPlan = FullPlan()
+    var planCurrent = PlanCurrent()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,7 @@ class YourPlanViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.hidesBackButton = true
+        navigationController?.navigationBar.tintColor = orange
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(backAction))
            
@@ -52,8 +54,9 @@ class YourPlanViewController: UIViewController {
         // Firebase
         datesRef.observe(.value, with: { snapshot in
             self.fullPlan = FullPlan(snapshot: snapshot)
+            self.planCurrent = PlanCurrent(fullPlan: self.fullPlan)
             if self.dateSelected == nil {
-                self.dateSelected = self.fullPlan.plan.keys.map { $0 }.sorted().first
+                self.dateSelected = self.planCurrent.plan.keys.map { $0 }.sorted().first
             }
             self.updateTableView()
             self.calendarCollectionView.reloadData()
@@ -91,7 +94,7 @@ class YourPlanViewController: UIViewController {
 
 extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let date = dateSelected, let plan = fullPlan.plan[date], let mealName = MealName(rawValue: mealNames[section]), let numRows = plan.day[mealName]?.count else {
+        guard let date = dateSelected, let plan = planCurrent.plan[date], let mealName = MealName(rawValue: mealNames[section]), let numRows = plan.day[mealName]?.count else {
             return 0
         }
         return numRows
@@ -99,7 +102,7 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mealItemCell", for: indexPath) as! MealItemCell
-        guard let date = dateSelected, let dayPlan = fullPlan.plan[date], let mealName = MealName(rawValue: mealNames[indexPath.section]), let foods = dayPlan.day[mealName] else {
+        guard let date = dateSelected, let dayPlan = planCurrent.plan[date], let mealName = MealName(rawValue: mealNames[indexPath.section]), let foods = dayPlan.day[mealName] else {
             return cell
         }
         
@@ -113,7 +116,7 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        guard let date = dateSelected, let mealName = MealName(rawValue: mealNames[indexPath.section]), let mealItem = (fullPlan.plan[date]?.day[mealName]?[indexPath.row]) else {
+        guard let date = dateSelected, let mealName = MealName(rawValue: mealNames[indexPath.section]), let mealItem = (planCurrent.plan[date]?.day[mealName]?[indexPath.row]) else {
             return
         }
         
@@ -124,7 +127,7 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
             
             let datesRef = Database.database().reference(withPath: "users/\(userId)/dates")
             
-            fullPlan.plan[date]?.day[mealName]!.remove(at: indexPath.row)
+            planCurrent.plan[date]?.day[mealName]!.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
 
             let dateString = formatter.string(from: date)
@@ -176,11 +179,11 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fullPlan.plan.keys.count + 1
+        return planCurrent.plan.keys.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row == fullPlan.plan.keys.count {
+        if indexPath.row == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "moreCalendarCell", for: indexPath) as! MoreCalendarCell
             let tapGesture = UITapGestureRecognizer(target: self, action: "pushMoreDatesView")
             cell.isUserInteractionEnabled = true
@@ -195,7 +198,7 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "calendarCell", for: indexPath) as! CalendarCell
         
-        let nsDate = fullPlan.plan.keys.map { $0 }.sorted()[indexPath.row]
+        let nsDate = planCurrent.plan.keys.map { $0 }.sorted()[indexPath.row - 1]
         let date = calendar.component(.day, from: nsDate)
         let weekday = calendar.component(.weekday, from: nsDate)
         let month = calendar.component(.month, from: nsDate)
@@ -220,7 +223,7 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        dateSelected = fullPlan.plan.keys.map { $0 }.sorted()[indexPath.row]
+        dateSelected = planCurrent.plan.keys.map { $0 }.sorted()[indexPath.row - 1]
         updateTableView()
         collectionView.reloadData()
         
@@ -295,9 +298,9 @@ extension YourPlanViewController {
 
 extension YourPlanViewController: MoreCalendarCellProtocol {
     @objc func pushMoreDatesView() {
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .white
-        navigationController?.present(viewController, animated: true, completion: nil)
+        let viewController = AllDatesViewController(fullPlan: fullPlan)
+        let modalNavigationController = UINavigationController(rootViewController: viewController)
+        navigationController?.present(modalNavigationController, animated: true, completion: nil)
     }
 }
 
