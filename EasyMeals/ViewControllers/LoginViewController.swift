@@ -73,6 +73,7 @@ extension LoginViewController: AuthControllerOutput {
         if let viewController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "YourPlanViewController") as? YourPlanViewController {
             navigationController?.pushViewController(viewController, animated: true)
         }
+        DataController.setUpDates()
     }
     
     func createUserFailed() {

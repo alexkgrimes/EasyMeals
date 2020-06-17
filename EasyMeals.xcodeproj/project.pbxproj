@@ -19,6 +19,7 @@
 		FAD351812467909A007399BC /* MoreCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD351802467909A007399BC /* MoreCalendarCell.swift */; };
 		FADCF8072467C23A00050F51 /* AllDatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADCF8062467C23A00050F51 /* AllDatesViewController.swift */; };
 		FADCF8092467C94C00050F51 /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADCF8082467C94C00050F51 /* DateTableViewCell.swift */; };
+		FADCF80B2468FF7A00050F51 /* PlanHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADCF80A2468FF7A00050F51 /* PlanHistoryViewController.swift */; };
 		FAF643A921211AFC00327A19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF643A821211AFC00327A19 /* AppDelegate.swift */; };
 		FAF643AB21211AFC00327A19 /* YourPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF643AA21211AFC00327A19 /* YourPlanViewController.swift */; };
 		FAF643AE21211AFC00327A19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF643AC21211AFC00327A19 /* Main.storyboard */; };
@@ -56,6 +57,7 @@
 		FAD351802467909A007399BC /* MoreCalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCalendarCell.swift; sourceTree = "<group>"; };
 		FADCF8062467C23A00050F51 /* AllDatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDatesViewController.swift; sourceTree = "<group>"; };
 		FADCF8082467C94C00050F51 /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
+		FADCF80A2468FF7A00050F51 /* PlanHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanHistoryViewController.swift; sourceTree = "<group>"; };
 		FAF643A521211AFC00327A19 /* EasyMeals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyMeals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF643A821211AFC00327A19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAF643AA21211AFC00327A19 /* YourPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPlanViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				FA08499F21266657002F4E3B /* AddItemViewController.swift */,
 				FA5D950C224E8B81002BA6CB /* LoginViewController.swift */,
 				FADCF8062467C23A00050F51 /* AllDatesViewController.swift */,
+				FADCF80A2468FF7A00050F51 /* PlanHistoryViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FADCF80B2468FF7A00050F51 /* PlanHistoryViewController.swift in Sources */,
 				FA5D950D224E8B81002BA6CB /* LoginViewController.swift in Sources */,
 				FAF643AB21211AFC00327A19 /* YourPlanViewController.swift in Sources */,
 				FAF643CD212285B900327A19 /* MealHeaderCell.swift in Sources */,

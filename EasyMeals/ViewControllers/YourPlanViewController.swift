@@ -13,7 +13,6 @@ class YourPlanViewController: UIViewController {
 
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     @IBOutlet weak var calendarFlowLayout: UICollectionViewFlowLayout!
-    @IBOutlet weak var mealPlanTableView: UITableView!
     @IBOutlet weak var tableView: UITableView!
     
     private enum Constants {
@@ -138,7 +137,6 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableCell(withIdentifier: "mealHeaderCell") as! MealHeaderCell
-        // let violet = hexStringToUIColor(hex: "6c71c4")
 
         header.mealNameLabel.text = mealNames[section]
         header.mealNameLabel.textColor = .white
