@@ -12,7 +12,7 @@ class PlanHistoryViewController: UIViewController {
     
     private enum Constants {
         static let cornerRadius: CGFloat = 16.0
-        static let tableViewHeaderHeight: CGFloat = 62.0
+        static let tableViewHeaderHeight: CGFloat = 50.0
     }
     
     var dateString: String = ""

@@ -18,7 +18,7 @@ class YourPlanViewController: UIViewController {
     private enum Constants {
         static let cornerRadius: CGFloat = 16.0
         static let numberOfCalendarCells = 12
-        static let tableViewHeaderHeight: CGFloat = 62.0
+        static let tableViewHeaderHeight: CGFloat = 50.0
     }
     
     let calendar = Calendar.current
@@ -183,13 +183,11 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "moreCalendarCell", for: indexPath) as! MoreCalendarCell
-            let tapGesture = UITapGestureRecognizer(target: self, action: "pushMoreDatesView")
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(pushMoreDatesView))
             cell.isUserInteractionEnabled = true
             cell.addGestureRecognizer(tapGesture)
             cell.backgroundColor = .darkGray
             cell.moreLabel.textColor = .white
-            cell.layer.borderColor = UIColor.lightGray.cgColor
-            cell.layer.borderWidth = 3.0
             cell.layer.cornerRadius = Constants.cornerRadius
             return cell
         }

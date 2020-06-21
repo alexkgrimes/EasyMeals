@@ -158,6 +158,9 @@ extension AllDatesViewController: UITableViewDelegate, UITableViewDataSource {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "PlanHistoryViewController") as! PlanHistoryViewController
         viewController.dateString = fullFormatter.string(from: dates[indexPath.row])
+        if let dayPlan = planHistory.plan[dates[indexPath.row]] {
+            viewController.day = dayPlan
+        }
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

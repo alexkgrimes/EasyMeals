@@ -58,7 +58,7 @@
 		FADCF8062467C23A00050F51 /* AllDatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDatesViewController.swift; sourceTree = "<group>"; };
 		FADCF8082467C94C00050F51 /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
 		FADCF80A2468FF7A00050F51 /* PlanHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanHistoryViewController.swift; sourceTree = "<group>"; };
-		FAF643A521211AFC00327A19 /* EasyMeals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyMeals.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAF643A521211AFC00327A19 /* Plate Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Plate Planner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF643A821211AFC00327A19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAF643AA21211AFC00327A19 /* YourPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPlanViewController.swift; sourceTree = "<group>"; };
 		FAF643AD21211AFC00327A19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 		FAF643A621211AFC00327A19 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FAF643A521211AFC00327A19 /* EasyMeals.app */,
+				FAF643A521211AFC00327A19 /* Plate Planner.app */,
 				FAF643B921211AFD00327A19 /* EasyMealsTests.xctest */,
 			);
 			name = Products;
@@ -221,7 +221,7 @@
 			);
 			name = EasyMeals;
 			productName = EasyMeals;
-			productReference = FAF643A521211AFC00327A19 /* EasyMeals.app */;
+			productReference = FAF643A521211AFC00327A19 /* Plate Planner.app */;
 			productType = "com.apple.product-type.application";
 		};
 		FAF643B821211AFD00327A19 /* EasyMealsTests */ = {
@@ -559,7 +559,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.alexkgrimes.EasyMeals;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Plate Planner";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -578,7 +578,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.alexkgrimes.EasyMeals;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Plate Planner";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
