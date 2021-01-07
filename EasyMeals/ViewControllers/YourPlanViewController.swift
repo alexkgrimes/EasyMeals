@@ -22,7 +22,6 @@ class YourPlanViewController: UIViewController {
     }
     
     let calendar = Calendar.current
-    let orange = UIColor(red: 255.0 / 255.0, green: 149.0 / 255.0, blue: 0, alpha: 1.0)
 
     var mealTapped: String? = nil
     var dateSelected: Date? = nil
@@ -32,12 +31,22 @@ class YourPlanViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = false
+        
+        navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.hidesBackButton = true
-        navigationController?.navigationBar.tintColor = orange
-
+        navigationController?.navigationBar.tintColor = .systemOrange
+        
+        
+        if #available(iOS 13.0, *) {
+            if traitCollection.userInterfaceStyle == .dark {
+                navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            } else {
+                navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+            }
+        }
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(backAction))
            
         guard let userId = AuthController.userId else {
@@ -106,11 +115,21 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         cell.foodLabel.text = foods[indexPath.row]
-        cell.foodLabel.textColor = .black
+        if #available(iOS 13.0, *) {
+            cell.foodLabel.textColor = .label
+        } else {
+            cell.foodLabel.textColor = .black
+            
+        }
         
-        cell.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            cell.backgroundColor = .systemBackground
+            cell.layer.borderColor = UIColor.systemBackground.cgColor
+        } else {
+            cell.backgroundColor = .white
+            cell.layer.borderColor = UIColor.white.cgColor
+        }
         cell.selectionStyle = UITableViewCellSelectionStyle.none
-        cell.layer.borderColor = UIColor.white.cgColor as CGColor
         return cell
     }
     
@@ -139,10 +158,15 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
         let header = tableView.dequeueReusableCell(withIdentifier: "mealHeaderCell") as! MealHeaderCell
 
         header.mealNameLabel.text = mealNames[section]
-        header.mealNameLabel.textColor = .white
-        header.addItemButton.setTitleColor(.white, for: .normal)
+        if #available(iOS 13.0, *) {
+            header.mealNameLabel.textColor = .systemBackground
+            header.addItemButton.setTitleColor(.systemBackground, for: .normal)
+        } else {
+            header.mealNameLabel.textColor = .white
+            header.addItemButton.setTitleColor(.white, for: .normal)
+        }
         
-        header.contentView.backgroundColor = orange
+        header.contentView.backgroundColor = .systemOrange
         header.contentView.layer.cornerRadius = Constants.cornerRadius
         header.contentView.layer.borderWidth = 0
         
@@ -164,7 +188,11 @@ extension YourPlanViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footer = UIView()
-        footer.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            footer.backgroundColor = .systemBackground
+        } else {
+            footer.backgroundColor = .white
+        }
         return footer
     }
     
@@ -186,8 +214,14 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(pushMoreDatesView))
             cell.isUserInteractionEnabled = true
             cell.addGestureRecognizer(tapGesture)
-            cell.backgroundColor = .darkGray
-            cell.moreLabel.textColor = .white
+            if #available(iOS 13.0, *) {
+                cell.backgroundColor = .systemGray
+                cell.moreLabel.textColor = .systemGray6
+            } else {
+                cell.backgroundColor = .darkGray
+                cell.moreLabel.textColor = .white
+            }
+            
             cell.layer.cornerRadius = Constants.cornerRadius
             return cell
         }
@@ -201,14 +235,24 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
         
         cell.dayLabel.text = calendarDays[weekday - 1]
         cell.dateLabel.text = calendarMonths[month - 1] + " \(date)"
-        cell.dayLabel.textColor = .white
-        cell.dateLabel.textColor = .white
+        if #available(iOS 13.0, *) {
+            cell.dayLabel.textColor = .label
+            cell.dateLabel.textColor = .label
+        } else {
+            cell.dayLabel.textColor = .white
+            cell.dateLabel.textColor = .white
+        }
         
-        cell.backgroundColor = .gray
+        
+        if #available(iOS 13.0, *) {
+            cell.backgroundColor = .systemGray3
+        } else {
+            cell.backgroundColor = .gray
+        }
         cell.layer.cornerRadius = Constants.cornerRadius
         
         if nsDate == dateSelected {
-            cell.layer.borderColor = orange.cgColor
+            cell.layer.borderColor = UIColor.systemOrange.cgColor
             cell.layer.borderWidth = 3.0
         } else {
             cell.layer.borderWidth = 0
@@ -223,7 +267,7 @@ extension YourPlanViewController: UICollectionViewDataSource, UICollectionViewDe
         updateTableView()
         collectionView.reloadData()
         
-        cell?.layer.borderColor = orange.cgColor
+        cell?.layer.borderColor = UIColor.systemOrange.cgColor
         cell?.layer.borderWidth = 3.0
     }
 }
@@ -261,6 +305,7 @@ extension YourPlanViewController: CreateMealDelegate {
 
 extension YourPlanViewController: AuthControllerLogout {
     func signOut() {
+        navigationController?.isNavigationBarHidden = true
         navigationController?.popViewController(animated: true)
     }
 }

@@ -15,8 +15,6 @@ class AllDatesViewController: UIViewController {
     var fullPlan: FullPlan
     var planHistory: PlanHistory
     
-    // let orange = UIColor(red: 255.0 / 255.0, green: 149.0 / 255.0, blue: 0, alpha: 1.0)
-    
     let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .plain)
         table.separatorStyle = .none
@@ -72,9 +70,6 @@ class AllDatesViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
-//        navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationItem.largeTitleDisplayMode = .always
-//        navigationController?.navigationBar.topItem?.title = "Meal History"
         navigationController?.navigationBar.tintColor = .systemOrange
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "⨉", style: .plain, target: self, action: #selector(dismissView))
         
