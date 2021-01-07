@@ -51,6 +51,15 @@ class AddItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if #available(iOS 13.0, *) {
+            if traitCollection.userInterfaceStyle == .dark {
+                navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            } else {
+                navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+            }
+        }
+        
         doneAddingButton.layer.cornerRadius = 14.0
         doneAddingButton.layer.masksToBounds = true
         // Do any additional setup after loading the view.

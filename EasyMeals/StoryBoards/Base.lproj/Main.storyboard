@@ -366,7 +366,8 @@
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="T4R-d5-yjN"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="tintColor" systemColor="systemOrangeColor"/>
                         <constraints>
                             <constraint firstItem="G5x-MO-4FQ" firstAttribute="leading" secondItem="T4R-d5-yjN" secondAttribute="leading" constant="16" id="0Z1-Fd-kfE"/>
                             <constraint firstItem="T4R-d5-yjN" firstAttribute="trailing" secondItem="SaW-Ne-1r5" secondAttribute="trailing" constant="16" id="5Nu-HO-8r1"/>
