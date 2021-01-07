@@ -88,6 +88,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="tintColor" systemColor="secondaryLabelColor"/>
                                 <state key="normal" title="Forgot your password?"/>
+                                <connections>
+                                    <action selector="forgotPasswordButtonPressed:" destination="83t-Ds-fNx" eventType="touchUpInside" id="YA5-Fq-ahV"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Gpq-Bl-uxN"/>
