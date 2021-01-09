@@ -29,7 +29,6 @@ jobs:
       
     - name: Install Dependences
       run: |
-        cd "iOS App"
         pod repo update
         pod install
       shell: bash
